@@ -6,7 +6,7 @@ import {
   loadJsonFile,
   normalizePath,
   FileFilter
-} from '@qkt/node-tools'
+} from '@varlinor/node-tools'
 import { build as buildJs } from 'unbuild'
 import { build as buildVue, defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'

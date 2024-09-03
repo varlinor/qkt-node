@@ -1,5 +1,5 @@
 {
-  "name": "@qkt/node",
+  "name": "@varlinor/node",
   "private": true,
   "version": "1.0.0",
   "description": "",
@@ -9,7 +9,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "postinstall": "node postinstall.js",
-    "clean": "pnpm --filter=@qkt/* run clean",
+    "clean": "pnpm --filter=@varlinor/* run clean",
     "build": "pnpm install --no-optional && pnpm --filter=./packages/* run build",
     "clean:tags": "pnpm --filter=./packages/cli run build && node ./packages/cli/dist/index.mjs tag -f snapshot",
     "release": "pnpm run build && pnpm changeset publish && pnpm run clean:tags "

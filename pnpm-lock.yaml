@@ -80,7 +80,7 @@ importers:
 
   packages/builder:
     dependencies:
-      '@qkt/node-tools':
+      '@varlinor/node-tools':
         specifier: workspace:*
         version: link:../node-tools
       '@rollup/plugin-alias':
@@ -143,7 +143,7 @@ importers:
 
   packages/cli:
     dependencies:
-      '@qkt/node-tools':
+      '@varlinor/node-tools':
         specifier: workspace:*
         version: link:../node-tools
       chalk:

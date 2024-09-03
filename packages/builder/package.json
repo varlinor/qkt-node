@@ -1,6 +1,6 @@
 {
-  "name": "@qkt/builder",
-  "version": "1.0.0",
+  "name": "@varlinor/builder",
+  "version": "1.0.1-snapshot.0",
   "description": " just for parse build options",
   "keywords": [
     "quicktools-web",
@@ -28,6 +28,9 @@
     "clean": "rimraf dist",
     "build": "unbuild"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-babel": "^6.0.4",
@@ -37,7 +40,7 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-replace": "^5.0.6",
     "@rollup/plugin-url": "^8.0.2",
-    "@qkt/node-tools": "workspace:*",
+    "@varlinor/node-tools": "workspace:*",
     "@vitejs/plugin-vue": "^5.0.5",
     "autoprefixer": "^10.4.19",
     "cssnano": "^7.0.2",

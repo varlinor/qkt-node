@@ -3,7 +3,7 @@ import path from 'path'
 import fs from 'fs-extra'
 import { dependencies } from './package.json'
 import { devDependencies } from '../../package.json'
-import { getAllDependencies } from '@qkt/node-tools'
+import { getAllDependencies } from '@varlinor/node-tools'
 
 console.log('prepare for build lib:')
 const entries = [

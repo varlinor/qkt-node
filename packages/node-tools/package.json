@@ -1,11 +1,30 @@
 {
-  "name": "@qkt/node-tools",
-  "version": "1.0.0",
-  "description": " just for node",
+  "name": "@varlinor/node-tools",
+  "version": "1.0.1-snapshot.0",
+  "description": "This package provides a collection of utility functions for Node.js environments, focusing on file operations, JSON parsing, dependency management, and Vue component scanning. It includes functions for recursively scanning directories, loading and parsing JSON files, managing dependencies, merging TypeScript configuration aliases, and offering interactive file selection. These tools are particularly useful for Node.js developers who need to streamline their build processes and manage project dependencies efficiently. And plugins provides a series of Rollup plugins focused on simplifying the build process for front-end development. It includes plugins for generating SVG symbols, supporting Vue 3 Single File Components, and handling dynamic module imports. With these tools, developers can more efficiently manage resources, optimize build processes, and enhance project flexibility.",
   "keywords": [
     "quicktools",
     "node tools",
-    "node"
+    "node",
+    "Node.js utilities",
+    "file scanning",
+    "JSON file loading",
+    "dependency management",
+    "TypeScript config merging",
+    "Vue component scanning",
+    "interactive file selection",
+    "Node.js tools",
+    "node 文件操作",
+    "node 依赖管理",
+    "Vue 组件扫描",
+    "SVG symbol generation",
+    "Vue 3 SFC adapter",
+    "Dynamic module import",
+    "Rollup plugin utilities",
+    "SVG符号生成",
+    "Vue 3组件适配",
+    "动态模块导入",
+    "Rollup插件工具"
   ],
   "author": "varlinor",
   "license": "Apache-2.0",
@@ -25,6 +44,9 @@
     "clean": "rimraf dist",
     "build": " unbuild",
     "test": "node ./test/select_test.js "
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@inquirer/checkbox": "^1.5.2",

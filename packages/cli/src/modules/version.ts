@@ -4,7 +4,7 @@ import path from 'path'
 import YAML from 'yaml'
 import shell from 'shelljs'
 import semver from 'semver'
-import { normalizePath } from '@qkt/node-tools'
+import { normalizePath } from '@varlinor/node-tools'
 
 /**
  * node ./internal/cli/dist/qkt-cli.mjs semver -i
@@ -394,13 +394,13 @@ async function prepareChangesetPreInfo(changesetRoot, preCfgData, releaseType, p
  * @param {*} targetFile
  * @param {*} versionList
  */
-function updateTemplatePackageFile(targetFile, versionList) {
+function updateTemplatePackageFile(targetFile, versionList, corePackageName='@qkt/core') {
   if (Array.isArray(versionList) && fs.existsSync(targetFile)) {
     const versionMap = {}
     let mainVer
     versionList.forEach((v) => {
       versionMap[v.name] = v.version
-      if (v.name == '@qkt2/common') {
+      if (v.name == corePackageName) {
         mainVer = v.version
       }
     })

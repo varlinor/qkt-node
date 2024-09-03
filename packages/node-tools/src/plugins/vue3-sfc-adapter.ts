@@ -2,7 +2,7 @@
 import { cloneDeep } from 'lodash-es'
 const extensions = ['.ts', '.js', '.jsx', '.tsx', '.css', '.scss', '.vue']
 
-export function vue3SfcAdapter(scope = '@qkt3/') {
+export function vue3SfcAdapter(scope = '@qkt/') {
   let curAlias = []
   return {
     name: 'rts-plugin:vue3-sfc-adapter',

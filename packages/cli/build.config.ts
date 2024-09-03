@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs-extra'
 import { dependencies } from './package.json'
 import { defineBuildConfig } from 'unbuild'
-import { getAllDependencies } from '@qkt/node-tools'
+import { getAllDependencies } from '@varlinor/node-tools'
 
 const entries = [
   { name: 'index', input: './src/index.ts' },
