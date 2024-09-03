@@ -54,5 +54,16 @@
     "fs-extra": "^11.2.0",
     "lodash-es": "^4.17.21",
     "@rollup/pluginutils": "^5.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varlinor/qkt-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/varlinor/qkt-node/issues"
+  },
+  "homepage": "https://github.com/varlinor/qkt-node",
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

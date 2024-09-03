@@ -49,5 +49,16 @@
     "shelljs": "^0.8.5",
     "simple-git": "^3.25.0",
     "yaml": "^2.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varlinor/qkt-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/varlinor/qkt-node/issues"
+  },
+  "homepage": "https://github.com/varlinor/qkt-node",
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

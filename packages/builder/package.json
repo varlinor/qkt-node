@@ -71,5 +71,16 @@
     "@vitejs/plugin-vue": ">5.0.0",
     "vite": ">5.0.0",
     "vite-plugin-css-injected-by-js": "^3.5.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varlinor/qkt-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/varlinor/qkt-node/issues"
+  },
+  "homepage": "https://github.com/varlinor/qkt-node",
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

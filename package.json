@@ -7,6 +7,17 @@
   "keywords": [],
   "author": "varlinor",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varlinor/qkt-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/varlinor/qkt-node/issues"
+  },
+  "homepage": "https://github.com/varlinor/qkt-node",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "postinstall": "node postinstall.js",
     "clean": "pnpm --filter=@varlinor/* run clean",
