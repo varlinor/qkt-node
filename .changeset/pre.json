@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "snapshot",
+  "initialVersions": {
+    "@qkt/builder": "1.0.0",
+    "@qkt/cli": "1.0.0",
+    "@qkt/node-tools": "1.0.0"
+  },
+  "changesets": []
+}

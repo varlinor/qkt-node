@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "display": "Node",
+  "compilerOptions": {
+    "paths": {
+    }
+  },
+  "include": [
+    "packages/**/*.ts",
+    "packages/**/*.vue",
+  ],
+}

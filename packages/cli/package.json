@@ -1,0 +1,31 @@
+{
+  "name": "@qkt/cli",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "varlinor",
+  "license": "Apache-2.0",
+  "main": "./dist/index.mjs",
+  "bin": {
+    "qkt-cli": "./dist/index.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "node ./dist/index.mjs -h",
+    "clean": "rimraf dist",
+    "build": "unbuild"
+  },
+  "dependencies": {
+    "@qkt/node-tools": "workspace:*",
+    "chalk": "^5.3.0",
+    "commander": "^11.0.0",
+    "fs-extra": "^11.1.1",
+    "lodash-es": "^4.17.21",
+    "semver": "^7.6.2",
+    "shelljs": "^0.8.5",
+    "simple-git": "^3.25.0",
+    "yaml": "^2.3.4"
+  }
+}

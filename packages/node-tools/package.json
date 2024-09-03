@@ -1,0 +1,36 @@
+{
+  "name": "@qkt/node-tools",
+  "version": "1.0.0",
+  "description": " just for node",
+  "keywords": [
+    "quicktools",
+    "node tools",
+    "node"
+  ],
+  "author": "varlinor",
+  "license": "Apache-2.0",
+  "main": "./dist/index.cjs",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./*": "./dist/*"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": " unbuild",
+    "test": "node ./test/select_test.js "
+  },
+  "dependencies": {
+    "@inquirer/checkbox": "^1.5.2",
+    "@inquirer/core": "^8.2.2",
+    "fs-extra": "^11.2.0",
+    "lodash-es": "^4.17.21",
+    "@rollup/pluginutils": "^5.0.2"
+  }
+}
