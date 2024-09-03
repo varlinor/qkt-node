@@ -1,8 +1,7 @@
-
 import { cloneDeep } from 'lodash-es'
 const extensions = ['.ts', '.js', '.jsx', '.tsx', '.css', '.scss', '.vue']
 
-export function vue3SfcAdapter(scope = '@qkt/') {
+export function vue3SfcAdapter(scopes: string[]) {
   let curAlias = []
   return {
     name: 'rts-plugin:vue3-sfc-adapter',
@@ -19,7 +18,7 @@ export function vue3SfcAdapter(scope = '@qkt/') {
       if (!hasSuffix) {
         const matched = curAlias.some((a) => source.indexOf(a.replacement) > -1)
         // console.log('matched:', matched)
-        if (matched || source.startsWith(scope)) {
+        if (matched || scopes.some(sc => source.includes(sc))) {
           // 仅在开发环境中应用
           try {
             // 尝试解析 .vue 文件

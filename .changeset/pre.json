@@ -2,11 +2,9 @@
   "mode": "pre",
   "tag": "snapshot",
   "initialVersions": {
-    "@varlinor/builder": "1.0.0",
-    "@varlinor/cli": "1.0.0",
-    "@varlinor/node-tools": "1.0.0"
+    "@varlinor/builder": "1.0.2",
+    "@varlinor/cli": "1.0.2",
+    "@varlinor/node-tools": "1.0.2"
   },
-  "changesets": [
-    "grumpy-seals-sniff"
-  ]
+  "changesets": []
 }
