@@ -1,10 +1,7 @@
 .DS_Store
 node_modules
 dist/
-# 后续会替换成index开头的文件，因此该条目后续会删除
-**/install*.js
-examples/
-#internal/
+
 
 /tests/e2e/videos/
 /tests/e2e/screenshots/
