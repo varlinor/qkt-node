@@ -20,7 +20,6 @@ export function dynamicImport({ include, exclude, componentsMap, presetModules }
     enforce: 'pre',
     transform(code, id) {
       const p = normalizePath(id)
-
       if (isTargetImporter(p) && componentsMap && Object.keys(componentsMap).length) {
         // console.log('modify custom importer:', p)
         try {

@@ -1,6 +1,6 @@
 {
   "name": "@varlinor/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This package provides a set of command-line tools for managing and building front-end projects. These tools include functionalities for cleaning the node_modules directory, creating and managing project versions, removing Git tags, and generating Vue component definition files and entry files. With these CLI tools, developers can more efficiently maintain project structure, manage version control, automate common development tasks, and simplify the generation and management of components.",
   "keywords": [
     "CLI tools",

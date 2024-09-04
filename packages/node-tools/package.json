@@ -1,6 +1,6 @@
 {
   "name": "@varlinor/node-tools",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This package provides a collection of utility functions for Node.js environments, focusing on file operations, JSON parsing, dependency management, and Vue component scanning. It includes functions for recursively scanning directories, loading and parsing JSON files, managing dependencies, merging TypeScript configuration aliases, and offering interactive file selection. These tools are particularly useful for Node.js developers who need to streamline their build processes and manage project dependencies efficiently. And plugins provides a series of Rollup plugins focused on simplifying the build process for front-end development. It includes plugins for generating SVG symbols, supporting Vue 3 Single File Components, and handling dynamic module imports. With these tools, developers can more efficiently manage resources, optimize build processes, and enhance project flexibility.",
   "keywords": [
     "quicktools",
