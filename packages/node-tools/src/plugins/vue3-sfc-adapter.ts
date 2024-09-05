@@ -2,23 +2,27 @@ import { cloneDeep } from 'lodash-es'
 import { normalizePath } from '../modules/path-helper'
 const extensions = ['.ts', '.js', '.jsx', '.tsx', '.css', '.scss', '.vue']
 
-const tryResolve = async (packageName, otherParts, context, importer, options) => {
-  const srcPath = `${packageName}/src/${otherParts}`
-  const distPath = `${packageName}/dist/${otherParts}`
+const tryResolveFile = async (basePath, extensions, context, importer, options) => {
+  for (const ext of extensions) {
+    const resolved = await context.resolve(`${basePath}${ext}`, importer, options)
+    if (resolved) return resolved.id
+  }
+  return null
+}
 
-  // 尝试解析 .vue 文件
-  let resolved = await context.resolve(`${srcPath}.vue`, importer, options)
-  if (resolved) return resolved.id
+const tryDistResolve = async (distPath, context, importer, options) => {
+  return tryResolveFile(distPath, ['.js', '/index.js'], context, importer, options)
+}
 
-  // 尝试解析 .js 文件
-  resolved = await context.resolve(`${distPath}.js`, importer, options)
-  if (resolved) return resolved.id
-
-  // 尝试解析 index.js 文件
-  resolved = await context.resolve(`${distPath}/index.js`, importer, options)
-  if (resolved) return resolved.id
-
-  return null // 无法解析
+const trySrcResolve = async (srcPath, context, importer, options) => {
+  if (!srcPath.includes('src/')) return null
+  return tryResolveFile(
+    srcPath,
+    ['.vue', '/index.vue', '/index.js', '/index.ts'],
+    context,
+    importer,
+    options
+  )
 }
 
 export function vue3SfcAdapter(scopes: string[]) {
@@ -32,10 +36,17 @@ export function vue3SfcAdapter(scopes: string[]) {
       curAlias = cloneDeep(alias)
       // console.log('current alias:', JSON.stringify(curAlias))
     },
+    /*
+      可能遇到的情况：
+      1、加载已经安装的指定scopes里的第三方包做处理，此时source为@scope开头
+      2、加载本地packages里某个包的组件，因为在vite.config中配置了alias，所以会将@scope/packageName转换成本地路径，
+        此时source变成了/yourPackagePath/packages/components/这种格式
+      PS：经过验证，本地包不添加alias时，无法通过@开头的处理逻辑进行解析，即使添加src也不行
+      */
     async resolveId(source, importer, options) {
       const hasSuffix = extensions.some((e) => source.toLowerCase().endsWith(e))
       if (!hasSuffix) {
-        const matched = curAlias.some((a) => source.indexOf(a.replacement) > -1)
+        const matched = curAlias.find((a) => source.indexOf(a.replacement) > -1)
         // console.log('matched:', matched)
         if (matched || scopes.some((sc) => source.includes(sc))) {
           // 仅在开发环境中应用
@@ -43,27 +54,15 @@ export function vue3SfcAdapter(scopes: string[]) {
             const p = normalizePath(source)
             const pArr = p.split('/')
             let resolvedId = null
-
-            if (p.startsWith('@') && pArr.length > 2) {
+            if (matched) {
+              resolvedId = await trySrcResolve(p, this, importer, options)
+            } else if (p.startsWith('@') && pArr.length > 2) {
               // 处理私有包路径（@开头）
-              resolvedId = await tryResolve(
-                `${pArr[0]}/${pArr[1]}`,
-                pArr.slice(2).join('/'),
-                this,
-                importer,
-                options
-              )
+              resolvedId = await tryDistResolve(p, this, importer, options)
             } else if (pArr.length > 1) {
               // 处理普通路径
-              resolvedId = await tryResolve(
-                pArr[0],
-                pArr.slice(1).join('/'),
-                this,
-                importer,
-                options
-              )
+              resolvedId = await tryDistResolve(p, this, importer, options)
             }
-
             if (resolvedId) return resolvedId
 
             // 如果无法匹配到，使用默认解析

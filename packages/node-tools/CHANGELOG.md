@@ -1,5 +1,11 @@
 # @varlinor/node-tools
 
+## 1.0.4
+
+### Patch Changes
+
+- refactor: 重构vue3-sfc-adapter对安装后的指定包、或者本地packages下指定包的加载机制，支持省略index的加载
+
 ## 1.0.3
 
 ### Patch Changes
