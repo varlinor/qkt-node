@@ -1,5 +1,10 @@
 # @varlinor/builder
 
+Deprecated.
+
+This package is deprecated. Please use @varlinor/builder-vue2 and @varlinor/builder-vue3 instead.
+
+
 ## 1.0.4
 
 ### Patch Changes

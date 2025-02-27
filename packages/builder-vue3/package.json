@@ -1,0 +1,70 @@
+{
+  "name": "@varlinor/builder-vue3",
+  "version": "1.0.5",
+  "description": "This package provides a set of Rollup and Vite configurations and utility functions tailored for Vue.js development environments, focusing on simplifying the build process for front-end development. It includes modules for configuring Rollup and Vite for Vue 2 and Vue 3 projects, dynamic module imports, file path handling, and building scripts and components. These tools are particularly useful for developers looking to optimize their build processes and efficiently manage project dependencies.",
+  "keywords": [
+    "quicktools-web",
+    "vue3",
+    "vite",
+    "rollup",
+    "unbuild",
+    "Rollup configuration",
+    "Vite configuration",
+    "Vue3 build tools",
+    "Dynamic module import",
+    "File operations",
+    "Dependency management",
+    "Rollup 配置",
+    "Vite 配置",
+    "Vue3 构建工具",
+    "动态模块导入",
+    "文件操作",
+    "依赖管理"
+  ],
+  "author": "varlinor",
+  "license": "Apache-2.0",
+  "main": "./dist/index.cjs",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./*": "./dist/*"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "unbuild"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@varlinor/node-tools": "workspace:*",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "fs-extra": "^11.2.0",
+    "lodash-es": "^4.17.21",
+    "postcss-preset-env": "^10.0.2",
+    "vite": "^5.2.13",
+    "vite-plugin-css-injected-by-js": "^3.5.1"
+  },
+  "peerDependencies": {
+    "@vitejs/plugin-vue": ">5.0.0",
+    "vite": ">5.0.0",
+    "vite-plugin-css-injected-by-js": "^3.5.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varlinor/qkt-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/varlinor/qkt-node/issues"
+  },
+  "homepage": "https://github.com/varlinor/qkt-node",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

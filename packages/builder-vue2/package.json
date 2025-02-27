@@ -1,0 +1,79 @@
+{
+  "name": "@varlinor/builder-vue2",
+  "version": "1.0.5",
+  "description": "This package provides a set of Rollup and Vite configurations and utility functions tailored for Vue.js development environments, focusing on simplifying the build process for front-end development. It includes modules for configuring Rollup and Vite for Vue 2 and Vue 3 projects, dynamic module imports, file path handling, and building scripts and components. These tools are particularly useful for developers looking to optimize their build processes and efficiently manage project dependencies.",
+  "keywords": [
+    "quicktools-web",
+    "vue2",
+    "vite",
+    "rollup",
+    "unbuild",
+    "Rollup configuration",
+    "Vite configuration",
+    "Vue2 build tools",
+    "Dynamic module import",
+    "File operations",
+    "Dependency management",
+    "Rollup 配置",
+    "Vite 配置",
+    "Vue2 构建工具",
+    "动态模块导入",
+    "文件操作",
+    "依赖管理"
+  ],
+  "author": "varlinor",
+  "license": "Apache-2.0",
+  "main": "./dist/index.cjs",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./*": "./dist/*"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "unbuild"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@rollup/plugin-alias": "^5.1.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-image": "^3.0.3",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.6",
+    "@rollup/plugin-url": "^8.0.2",
+    "@varlinor/node-tools": "workspace:*",
+    "autoprefixer": "^10.4.19",
+    "cssnano": "^7.0.2",
+    "fs-extra": "^11.2.0",
+    "lodash-es": "^4.17.21",
+    "postcss-url": "^10.1.3",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-vue": "^6.0.0"
+  },
+  "peerDependencies": {
+    "@vitejs/plugin-vue": ">5.0.0",
+    "vite": ">5.0.0",
+    "vite-plugin-css-injected-by-js": "^3.5.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varlinor/qkt-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/varlinor/qkt-node/issues"
+  },
+  "homepage": "https://github.com/varlinor/qkt-node",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

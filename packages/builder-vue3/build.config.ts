@@ -8,9 +8,7 @@ import { getAllDependencies } from '@varlinor/node-tools'
 console.log('prepare for build lib:')
 const entries = [
   { name: 'index', input: './src/index.ts' },
-  { name: 'utils/dynamic-import', input: './src/utils/dynamic-import.ts' },
-  { name: 'vue2', input: './src/vue2/index.ts' },
-  { name: 'vue3', input: './src/vue3/index.ts' }
+  { name: 'utils/dynamic-import', input: './src/utils/dynamic-import.ts' }
 ]
 
 // 获取externals
