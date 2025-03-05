@@ -78,6 +78,69 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(typescript@5.5.4)
 
+  packages/builder:
+    dependencies:
+      '@rollup/plugin-alias':
+        specifier: ^5.1.0
+        version: 5.1.0(rollup@3.29.4)
+      '@rollup/plugin-babel':
+        specifier: ^6.0.4
+        version: 6.0.4(@babel/core@7.25.2)(rollup@3.29.4)
+      '@rollup/plugin-commonjs':
+        specifier: ^25.0.8
+        version: 25.0.8(rollup@3.29.4)
+      '@rollup/plugin-image':
+        specifier: ^3.0.3
+        version: 3.0.3(rollup@3.29.4)
+      '@rollup/plugin-json':
+        specifier: ^6.1.0
+        version: 6.1.0(rollup@3.29.4)
+      '@rollup/plugin-node-resolve':
+        specifier: ^15.2.3
+        version: 15.2.3(rollup@3.29.4)
+      '@rollup/plugin-replace':
+        specifier: ^5.0.6
+        version: 5.0.7(rollup@3.29.4)
+      '@rollup/plugin-url':
+        specifier: ^8.0.2
+        version: 8.0.2(rollup@3.29.4)
+      '@varlinor/node-tools':
+        specifier: workspace:*
+        version: link:../node-tools
+      '@vitejs/plugin-vue':
+        specifier: ^5.0.5
+        version: 5.1.3(vite@5.4.2)(vue@3.4.38)
+      autoprefixer:
+        specifier: ^10.4.19
+        version: 10.4.20(postcss@8.4.44)
+      cssnano:
+        specifier: ^7.0.2
+        version: 7.0.5(postcss@8.4.44)
+      fs-extra:
+        specifier: ^11.2.0
+        version: 11.2.0
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+      postcss-preset-env:
+        specifier: ^10.0.2
+        version: 10.0.2(postcss@8.4.44)
+      postcss-url:
+        specifier: ^10.1.3
+        version: 10.1.3(postcss@8.4.44)
+      rollup-plugin-postcss:
+        specifier: ^4.0.2
+        version: 4.0.2(postcss@8.4.44)
+      rollup-plugin-vue:
+        specifier: ^6.0.0
+        version: 6.0.0(@vue/compiler-sfc@3.4.38)
+      vite:
+        specifier: ^5.2.13
+        version: 5.4.2(@types/node@20.16.3)
+      vite-plugin-css-injected-by-js:
+        specifier: ^3.5.1
+        version: 3.5.1(vite@5.4.2)
+
   packages/builder-vue2:
     dependencies:
       '@rollup/plugin-alias':
@@ -206,6 +269,18 @@ importers:
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+
+  test:
+    dependencies:
+      '@varlinor/node-tools':
+        specifier: workspace:^
+        version: link:../packages/node-tools
+      fs-extra:
+        specifier: ^11.3.0
+        version: 11.3.0
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -3306,6 +3381,15 @@ packages:
 
   /fs-extra@11.2.0:
     resolution: {integrity: sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==}
+    engines: {node: '>=14.14'}
+    dependencies:
+      graceful-fs: 4.2.11
+      jsonfile: 6.1.0
+      universalify: 2.0.1
+    dev: false
+
+  /fs-extra@11.3.0:
+    resolution: {integrity: sha512-Z4XaCL6dUDHfP/jT25jJKMmtxvuwbkrD1vNSMFlo9lNLY2c5FHYSQgHPRZUjAB26TpDEoW9HCOgplrdbaPV/ew==}
     engines: {node: '>=14.14'}
     dependencies:
       graceful-fs: 4.2.11

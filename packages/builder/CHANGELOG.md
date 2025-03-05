@@ -1,9 +1,26 @@
 # @varlinor/builder
 
+## 1.0.6
+
+### Patch Changes
+
+- feat: modify generate entry in cli
+
+## 1.0.5
+
+### Patch Changes
+
+- refactor: split vue2 builder and vue3 builder
+
+## 1.0.5-snapshot.0
+
+### Patch Changes
+
+- refactor: split vue2 builder and vue3 builder
+
 Deprecated.
 
 This package is deprecated. Please use @varlinor/builder-vue2 and @varlinor/builder-vue3 instead.
-
 
 ## 1.0.4
 

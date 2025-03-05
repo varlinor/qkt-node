@@ -2,10 +2,12 @@
   "mode": "pre",
   "tag": "snapshot",
   "initialVersions": {
-    "@varlinor/builder-vue2": "1.0.5",
-    "@varlinor/builder-vue3": "1.0.5",
-    "@varlinor/cli": "1.0.4",
-    "@varlinor/node-tools": "1.0.4"
+    "@varlinor/builder": "1.0.6",
+    "@varlinor/builder-vue2": "1.0.7",
+    "@varlinor/builder-vue3": "1.0.7",
+    "@varlinor/cli": "1.0.5",
+    "@varlinor/node-tools": "1.0.4",
+    "@varlinor/test": "1.0.0"
   },
   "changesets": []
 }

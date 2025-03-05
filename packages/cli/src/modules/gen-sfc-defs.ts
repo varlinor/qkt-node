@@ -37,12 +37,12 @@ export async function generateSfcDefineAndEntryFiles(
   if (Array.isArray(selected)) {
     const packageName = path.basename(packageRoot)
     console.log('packageName:', packageName)
-    selected.forEach((file) => {
+    for (const file of selected) {
       // console.log('per file:', file)
       const name = path.basename(file, '.vue')
       const parentPath = path.dirname(file)
       let filename,
-        outputFileName,
+        outputFileName='index',
         exportName,
         importPath,
         basedir,
@@ -102,9 +102,9 @@ export async function generateSfcDefineAndEntryFiles(
         outputFileName,
         hasInstall
       })
-    })
+    }
 
-    preComDefs.forEach((preDef) => {
+    for (const preDef of preComDefs) {
       const same = comDefs.find((c) => {
         const tmpE = path.join(packageRoot, c.basedir, c.filename)
         if (!c.hasInstall && fs.existsSync(tmpE)) {
@@ -116,7 +116,11 @@ export async function generateSfcDefineAndEntryFiles(
           c.filename === preDef.filename
         )
       })
-      const entryFile = path.join(packageRoot, preDef.basedir.replace(`packages/${packageName}`,''), preDef.filename)
+      const entryFile = path.join(
+        packageRoot,
+        preDef.basedir.replace(`packages/${packageName}`, ''),
+        preDef.filename
+      )
       if (!same && !preDef.hasInstall) {
         const entryContent = formatEntryContent({
           exportName: preDef.exportName,
@@ -129,13 +133,13 @@ export async function generateSfcDefineAndEntryFiles(
         preDef.hasInstall = true
         comDefs.push(preDef)
       }
-    })
+    }
 
     if (comDefs.length) {
       fs.writeFileSync(defPath, JSON.stringify(comDefs, null, 2))
       console.log(`Components Define file [${defPath}] is generated!`)
-    }else{
-      console.log('No file need to be output!');
+    } else {
+      console.log('No file need to be output!')
     }
   }
 

@@ -63,6 +63,7 @@ export function getSfcBuildConfig(opts: SfcBuildOptions) {
     build: {
       minify: false,
       cssMinify: true,
+      emptyOutDir:false,
       lib: {
         name: name,
         formats: ['es'],
