@@ -1,5 +1,11 @@
 # @varlinor/builder-vue3
 
+## 1.0.8-snapshot.0
+
+### Patch Changes
+
+- fix: update i18n file resolve
+
 ## 1.0.7
 
 ### Patch Changes

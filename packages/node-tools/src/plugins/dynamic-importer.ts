@@ -2,9 +2,9 @@ import { createFilter } from '@rollup/pluginutils'
 import { normalizePath } from '../modules/path-helper'
 
 const isTargetImporter = (p: string): string => {
-  const buildCachePath = '@varlinor/builder/utils/dynamic-import'.replace(/\//g, '_')
+  const buildCachePath = '@varlinor/builder-vue3/utils/dynamic-import'.replace(/\//g, '_')
   return (
-    (p.includes('varlinor/builder') && p.includes('/utils/dynamic-import')) ||
+    (p.includes('varlinor/builder-vue3') && p.includes('/utils/dynamic-import')) ||
     p.includes(buildCachePath)
   )
 }

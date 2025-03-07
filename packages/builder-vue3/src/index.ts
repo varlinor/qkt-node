@@ -63,7 +63,7 @@ export function getSfcBuildConfig(opts: SfcBuildOptions) {
     build: {
       minify: false,
       cssMinify: true,
-      emptyOutDir:false,
+      emptyOutDir: false,
       lib: {
         name: name,
         formats: ['es'],
@@ -190,6 +190,7 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
 
 /**
  * 获取所有i18n文件，目录结构如下
+ * 需要排除node_modules下的目录
  * baseDir/
  *       moduleA/i18n/zh-cn.ts
  *              /i18n/en.ts
@@ -202,7 +203,7 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
  */
 export function getI18nFiles(packageRoot: string) {
   function filterFunc(f, filePath, parentPath) {
-    return parentPath.endsWith('i18n')
+    return parentPath.indexOf('node_modules') < 0 && parentPath.endsWith('i18n')
   }
   return getScriptFiles(packageRoot, filterFunc)
 }
@@ -228,7 +229,7 @@ export function getScriptFiles(packageRoot: string, entryFilter?: FileFilter) {
     if (pPath.indexOf('./') === 0) {
       pPath = pPath.substring(2)
     }
-    name = pPath ? `${pPath}/${name}` : name
+    name = pPath ? `${pPath}${name}` : name
     return {
       name,
       input: normalizePath(filePath)
