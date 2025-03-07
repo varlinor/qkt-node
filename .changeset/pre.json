@@ -9,5 +9,9 @@
     "@varlinor/node-tools": "1.0.4",
     "@varlinor/test": "1.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "fast-beans-roll",
+    "neat-ties-search",
+    "thin-dragons-vanish"
+  ]
 }

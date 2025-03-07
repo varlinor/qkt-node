@@ -12,11 +12,17 @@ for node environment, includes node-tools, builder, cli, etc.
 
 相关介绍，详见[node-tools Readme.md](./packages/node-tools/README.md)
 
-### builder
+### builder-vue2
 
-这个包提供打包相关的一些方法
+这个包提供 vue2 工程打包相关的一些方法
 
-相关介绍，详见[builder Readme.md](./packages/builder/README.md)
+相关介绍，详见[builder-vue2 Readme.md](./packages/builder-vue2/README.md)
+
+### builder-vue3
+
+这个包提供 vue3 工程打包相关的一些方法
+
+相关介绍，详见[builder-vue3 Readme.md](./packages/builder-vue3/README.md)
 
 ### cli
 

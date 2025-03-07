@@ -1,5 +1,11 @@
 # @varlinor/node-tools
 
+## 1.0.5-snapshot.0
+
+### Patch Changes
+
+- fix: update dynamic importer logic
+
 ## 1.0.4
 
 ### Patch Changes

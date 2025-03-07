@@ -1,5 +1,12 @@
 # @varlinor/builder-vue2
 
+## 1.0.8-snapshot.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@1.0.5-snapshot.0
+
 ## 1.0.7
 
 ### Patch Changes

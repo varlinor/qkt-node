@@ -1,5 +1,12 @@
 # @varlinor/cli
 
+## 1.0.6-snapshot.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@1.0.5-snapshot.0
+
 ## 1.0.5
 
 ### Patch Changes

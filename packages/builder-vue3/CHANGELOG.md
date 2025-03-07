@@ -1,5 +1,18 @@
 # @varlinor/builder-vue3
 
+## 1.0.8-snapshot.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@1.0.5-snapshot.0
+
+## 1.0.8-snapshot.1
+
+### Patch Changes
+
+- fix: 优化vue3 builder的配置和动态导入的处理逻辑
+
 ## 1.0.8-snapshot.0
 
 ### Patch Changes
