@@ -99,9 +99,29 @@ qkt-cli tag -f snapshot -r -o origin
    - **选项**:
      - `-t, --isTs`: 指定源文件为TypeScript。
      - `-e, --isOutputEntry`: 是否创建入口文件。
+     - `-p, --prefix <prefix>`: 组件exportName前缀，默认Qkt，例如"QktFileInfo"。
+     - `-f, --force`: 是否要强制替换定义文件，默认为false，即差异更新原定义文件。（注意，如果原本定义的内容中存在已删除的组件，对应的定义信息会被移除。）
 
 为包生成Vue组件的定义文件和入口文件。
 
 ```bash
 qkt-cli generate define -t -e
+```
+
+生成的SFC定义文件中每个组件的定义信息如下:
+```
+// 包名
+packageName: string;
+// 基础目录路径
+basedir: string;
+// 组件文件名
+filename: string;
+// 导出的组件名称
+exportName: string;
+// 导入路径
+importPath: string;
+// 输出文件名
+outputFileName: string;
+// 输出路径
+outputPath: string;
 ```

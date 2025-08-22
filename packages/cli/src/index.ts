@@ -3,6 +3,7 @@ import path from 'path'
 import fs from 'fs-extra'
 import chalk from 'chalk'
 import shell from 'shelljs'
+import { upperFirst, lowerCase } from 'lodash-es'
 import { normalizePath } from '@varlinor/node-tools'
 import { cleanNodeModules } from './modules/clean'
 import { deleteTags } from './modules/git'
@@ -91,11 +92,16 @@ program
   .description('used to generate files for packages ')
   .command('define')
   .option('-t, --isTs', 'specify source is typescript ', false)
-  .option('-e', '--isOutputEntry', 'create entry file', true)
+  .option('-e, --isOutputEntry', 'enable create entry file', true)
+  .option('-p, --prefix <prefix>', 'set component name prefix', 'Qkt')
+  .option('-f, --force', 'default is merge, when set true, will replace old define', false)
+
   .action(async (cmdObj) => {
-    let { isTs, isOutputEntry } = cmdObj
+    let { isTs, isOutputEntry, prefix, force } = cmdObj
     const baseDir = process.cwd()
-    generateSfcDefineAndEntryFiles(baseDir, isTs, isOutputEntry)
+    const mode = force ? 'replace' : 'merge'
+    const prefixStr = upperFirst(lowerCase(prefix))
+    generateSfcDefineAndEntryFiles(baseDir, isTs, isOutputEntry, prefixStr, mode)
   })
 
 /* final parse */

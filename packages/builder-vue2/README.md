@@ -20,7 +20,7 @@ build vue2 and js package
 
 ```javascript
 import path from 'path'
-import { Vue2Builder } from '@varlinor/builder'
+import * as Vue2Builder from '@varlinor/builder-vue2'
 import { dependencies, devDependencies } from '../package.json'
 // 由于 assert 语法需要高版本node支持，请注意
 import ComponentDefines from './components.json' assert { type: 'json' }

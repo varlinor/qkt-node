@@ -2,16 +2,23 @@ import fs from 'fs-extra'
 import path from 'path'
 import { camelCase, upperFirst } from 'lodash-es'
 import { selectSfc, normalizePath } from '@varlinor/node-tools'
+import { SfcDefineInfo } from '../types'
+
 
 /**
  * 基于包的根目录生成组件定义文件，针对ts编写的vue3的sfc
  * @param packageRoot
  * @param isTs
+ * @param isOutputEntry 是否输出入口文件
+ * @param prefix 组件名前缀
+ * @param mode 合并模式
  */
 export async function generateSfcDefineAndEntryFiles(
   packageRoot: string,
   isTs: boolean = false,
-  isOutputEntry: boolean = true
+  isOutputEntry: boolean = true,
+  prefix: string = 'Qkt',
+  mode: string = 'merge'
 ) {
   if (!packageRoot) {
     packageRoot = process.cwd()
@@ -19,8 +26,7 @@ export async function generateSfcDefineAndEntryFiles(
   console.log('current package root dir:', packageRoot)
   // 检查components.json
   const defPath = path.join(packageRoot, 'components.json')
-  const comDefs = []
-  let preComDefs = []
+  let preComDefs:SfcDefineInfo[] = []
   if (fs.existsSync(defPath)) {
     const comDefsInfo = fs.readFileSync(defPath, 'utf-8')
     if (comDefsInfo) {
@@ -33,107 +39,74 @@ export async function generateSfcDefineAndEntryFiles(
   }
   const selected = await selectSfc(packageRoot, isTs)
   const srcScriptSuffix = isTs ? '.ts' : '.js'
-
+  const allSelectedInfo=[]
+  let comDefs:SfcDefineInfo[] = []
+  const newDefs:SfcDefineInfo[] = []
+  const entryGenArr:SfcDefineInfo[] = []  // 待生成入口文件的列表
   if (Array.isArray(selected)) {
     const packageName = path.basename(packageRoot)
     console.log('packageName:', packageName)
     for (const file of selected) {
+      // 考虑将非vue的文件跳过。
       // console.log('per file:', file)
-      const name = path.basename(file, '.vue')
-      const parentPath = path.dirname(file)
-      let filename,
-        outputFileName='index',
-        exportName,
-        importPath,
-        basedir,
-        hasInstall = false
-      // 如果原组件里包含index.vue或者index.js，则不自动生成
-      const idxFilePath = path.join(parentPath, `index${srcScriptSuffix}`)
-      const parentDirName = path.basename(parentPath)
-      if (!fs.existsSync(idxFilePath)) {
-        let createEntry = false
-        if ('index' === name) {
-          //  有index.vue
-          filename = 'index.vue'
-          exportName = `Rts${upperFirst(camelCase(parentDirName))}`
-        } else if ('main' === name) {
-          filename = `index${srcScriptSuffix}`
-          exportName = `Rts${upperFirst(camelCase(parentDirName))}`
-          createEntry = true
-        } else {
-          filename = `index-${name}${srcScriptSuffix}`
-          exportName = `Rts${upperFirst(camelCase(name))}`
-          outputFileName = name
-          createEntry = true
-        }
-        importPath = `./${name}.vue`
-
-        const entryFile = path.join(parentPath, filename)
-        if (fs.existsSync(entryFile)) {
-          hasInstall = true
-        }
-        if (createEntry && isOutputEntry) {
-          // 生成entry文件
-          const entryContent = formatEntryContent({
-            exportName,
-            relatePath: importPath
-          })
-          fs.writeFileSync(entryFile, entryContent)
-          console.log('generate entry file:' + entryFile)
-        }
-      } else {
-        // 有index.js
-        hasInstall = true
-        filename = `index${srcScriptSuffix}`
-        exportName = `Rts${upperFirst(camelCase(parentDirName))}`
-      }
-
+      const name = file.endsWith(srcScriptSuffix) ? path.basename(file, srcScriptSuffix) : path.basename(file, '.vue')
+      const filename = path.basename(file) // 文件名
+      const parentPath = path.dirname(file)  // 文件父路径
+      const parentDirName = path.basename(parentPath)  // 父路径文件夹名
+      const relatedParentPath = normalizePath(parentPath).replace(normalizePath(packageRoot), '')
       // packages开头
-      basedir = `packages/${packageName}${normalizePath(parentPath).replace(
-        normalizePath(packageRoot),
-        ''
-      )}`
-      comDefs.push({
-        filename,
-        exportName,
-        importPath,
+      const basedir = `packages/${packageName}${relatedParentPath}`
+/*       allSelectedInfo.push({
+        name,
+        parentPath,
+        parentDirName,
+        file
+      }) */
+      let info:SfcDefineInfo = {
         packageName,
         basedir,
-        outputFileName,
-        hasInstall
-      })
-    }
-
-    for (const preDef of preComDefs) {
-      const same = comDefs.find((c) => {
-        const tmpE = path.join(packageRoot, c.basedir, c.filename)
-        if (!c.hasInstall && fs.existsSync(tmpE)) {
-          c.hasInstall = true
-        }
-        return (
-          c.exportName === preDef.exportName &&
-          c.basedir === preDef.basedir &&
-          c.filename === preDef.filename
-        )
-      })
-      const entryFile = path.join(
-        packageRoot,
-        preDef.basedir.replace(`packages/${packageName}`, ''),
-        preDef.filename
-      )
-      if (!same && !preDef.hasInstall) {
-        const entryContent = formatEntryContent({
-          exportName: preDef.exportName,
-          relatePath: preDef.importPath
-        })
-        fs.writeFileSync(entryFile, entryContent)
-        console.log('Generated missing entry file:', entryFile)
-
-        // 更新 preDef 的 hasInstall 状态
-        preDef.hasInstall = true
-        comDefs.push(preDef)
+        filename,
+        importPath: `./${filename}`,
+        outputPath: relatedParentPath,
       }
+      // 判断文件名
+      if ('index.vue' === filename) {
+        // 本身就是可以作为入口文件，打包成index.js，因本身是
+        info.exportName = `${prefix}${upperFirst(camelCase(parentDirName))}`
+        info.outputFileName = `index`
+      }else if ('main.vue' === filename) {
+        // 需要生成index.js
+        info.exportName= `${prefix}${upperFirst(camelCase(parentDirName))}`
+        info.outputFileName= `index`
+        entryGenArr.push(info)
+      }else{
+        // 如果父路径下存在多个打包文件，则生成index-文件名.js
+        info.exportName = `${prefix}${upperFirst(camelCase(name))}`
+        info.outputFileName = `index-${name}`
+        entryGenArr.push(info)
+      }
+      newDefs.push(info)
     }
+
+    if(isOutputEntry && !!entryGenArr.length){
+        // 生成入口文件
+      entryGenArr.forEach((item)=>{
+        const entryFilePath = path.join(packageRoot, item.outputPath, `${item.outputFileName}${srcScriptSuffix}`)
+        if (!fs.existsSync(entryFilePath)) {
+          // 生成entry文件
+          const entryContent = formatEntryContent({
+            exportName: item.exportName,
+            relatePath: item.importPath
+          })
+          fs.writeFileSync(entryFilePath, entryContent)
+          console.log('generate entry file:' + entryFilePath)
+        }
+      })
+    }
+
+    comDefs = formatComponentDefines(mode, preComDefs, newDefs,{
+      packageRoot, suffix:srcScriptSuffix,
+    })
 
     if (comDefs.length) {
       fs.writeFileSync(defPath, JSON.stringify(comDefs, null, 2))
@@ -151,7 +124,8 @@ export async function generateSfcDefineAndEntryFiles(
  * @param {*} comInfo {exportName,relatePath}
  * @returns
  */
-export function formatEntryContent(comInfo) {
+export function formatEntryContent(comInfo: {exportName: string, relatePath: string}) {
+
   return `
 /* Automatically generated by '@varlinor/cli' */
 
@@ -163,4 +137,49 @@ ${comInfo.exportName}.install = function (Vue) {
 
 export default ${comInfo.exportName}
 `.trim()
+}
+
+/**
+ * 校验组件定义
+ * @param {*} mode 合并模式
+ * @param {*} preComDefs 之前的定义
+ * @param {*} compDefines 最新的定义
+ * @returns
+ */
+function formatComponentDefines(mode:string = 'merge',
+  preComDefs:SfcDefineInfo[], compDefines: SfcDefineInfo[],
+  opts={packageRoot:string = '', suffix:string = ''}):SfcDefineInfo[] {
+  if(mode ==='merge'){
+    const newComDefs:SfcDefineInfo[]=[]
+    const { packageRoot, suffix } = opts
+    for (const preInf of preComDefs) {
+      const {packageName,basedir,filename, outputPath, outputFileName} =preInf
+
+      // 存在相同的定义
+      const cur = compDefines.find((p)=>{
+        return p.packageName ===packageName &&
+          p.basedir === basedir &&
+          p.filename === filename &&
+          p.outputPath === outputPath &&
+          p.outputFileName === outputFileName
+      })
+      // 只在pre中存在
+      if(!cur){
+        const entryFile = path.join(packageRoot, outputPath, `${outputFileName}${suffix}`)
+        // 检查pre中的入口文件是否存在
+        if(fs.existsSync(entryFile) || filename ==='index.vue'){
+          newComDefs.push(preInf)
+        }else{
+          console.log('%s is not exist, remove it\'s defineInfo',entryFile)
+        }
+      }
+    }
+    newComDefs.push(...compDefines)
+    return newComDefs
+  }else if(mode === 'replace'){
+    return compDefines
+  }else{
+    return [] as SfcDefineInfo[]
+
+  }
 }

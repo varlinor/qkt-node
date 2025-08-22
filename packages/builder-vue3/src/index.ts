@@ -154,18 +154,16 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
   // 准备sfc的打包配置
   const buildPromise = []
   ComponentsInfo.forEach((com) => {
-    const { filename, exportName, packageName, basedir, outputFileName } = com
-    const outputPath = basedir.replace(`packages/${packageName}/src/`, '')
+    const { packageName, basedir, filename, outputPath, outputFileName } = com
     const entry = path.join('./src', outputPath, filename)
     const outputBase = `${DistDir}/${outputPath}`
-    const outFile = outputFileName ? outputFileName : 'index'
     const buildOpt = getSfcBuildConfig({
       input: entry,
       output: {
         dir: outputBase,
-        entryFileNames: `${outFile}.js`
+        entryFileNames: `${outputFileName}.js`
       },
-      name: `${outputPath}/${outFile}`,
+      name: `${outputPath}/${outputFileName}`,
       externals: allExternals
     })
     if (buildOpt) {

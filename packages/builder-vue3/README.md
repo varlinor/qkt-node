@@ -20,7 +20,7 @@ build vue3 package
 
 ```javascript
 import path from 'path'
-import { Vue2Builder, Vue3Builder } from '@varlinor/builder'
+import * as Vue3Builder from '@varlinor/builder-vue3'
 import { normalizePath } from '@varlinor/node-tools'
 
 const packageRoot = normalizePath(process.cwd())
@@ -42,7 +42,7 @@ build pure js package
 
 ```javascript
 import path from 'path'
-import { Vue3Builder } from '@varlinor/builder'
+import * as Vue3Builder from '@varlinor/builder-vue3'
 import { normalizePath } from '@varlinor/node-tools'
 
 const packageRoot = normalizePath(process.cwd())

@@ -1,5 +1,17 @@
 # @varlinor/node-tools
 
+## 1.1.0
+
+### Minor Changes
+
+- 更新基础依赖的util，优化vue sfc入口文件的生成和定义文件生成逻辑
+
+## 1.0.5
+
+### Patch Changes
+
+- e0df7b7: fix: update dynamic importer logic
+
 ## 1.0.5-snapshot.0
 
 ### Patch Changes

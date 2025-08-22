@@ -2,16 +2,11 @@
   "mode": "pre",
   "tag": "snapshot",
   "initialVersions": {
-    "@varlinor/builder": "1.0.6",
-    "@varlinor/builder-vue2": "1.0.7",
-    "@varlinor/builder-vue3": "1.0.7",
-    "@varlinor/cli": "1.0.5",
-    "@varlinor/node-tools": "1.0.4",
-    "@varlinor/test": "1.0.0"
+    "@varlinor/builder-vue2": "1.1.0",
+    "@varlinor/builder-vue3": "1.1.0",
+    "@varlinor/cli": "1.1.0",
+    "@varlinor/node-tools": "1.1.0",
+    "@varlinor/test": "1.0.2"
   },
-  "changesets": [
-    "fast-beans-roll",
-    "neat-ties-search",
-    "thin-dragons-vanish"
-  ]
+  "changesets": []
 }

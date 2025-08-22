@@ -1,5 +1,23 @@
 # @varlinor/cli
 
+## 1.1.0
+
+### Minor Changes
+
+- 更新基础依赖的util，优化vue sfc入口文件的生成和定义文件生成逻辑
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@1.1.0
+
+## 1.0.6
+
+### Patch Changes
+
+- Updated dependencies [e0df7b7]
+  - @varlinor/node-tools@1.0.5
+
 ## 1.0.6-snapshot.0
 
 ### Patch Changes
