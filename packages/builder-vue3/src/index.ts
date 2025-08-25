@@ -156,7 +156,7 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
   ComponentsInfo.forEach((com) => {
     const { packageName, basedir, filename, outputPath, outputFileName } = com
     // 截取掉/src，方便获得输出后的相对路径
-    const outDir = outputPath.substring('/src'.length, outputPath.length - 1)
+    const outDir = outputPath.substring('/src'.length, outputPath.length)
     // 判定入口文件，文件名规则和入口文件生成一致
     const entryFileName = outputFileName === 'index' ? 'index' : `index-${outputFileName}`
     // 将入口文件作为打包入口（提供了name的生成）
