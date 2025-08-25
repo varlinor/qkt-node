@@ -1,6 +1,6 @@
 {
   "name": "@varlinor/builder-vue3",
-  "version": "1.1.0",
+  "version": "1.1.1-snapshot.1",
   "description": "This package provides a set of Rollup and Vite configurations and utility functions tailored for Vue.js development environments, focusing on simplifying the build process for front-end development. It includes modules for configuring Rollup and Vite for Vue 2 and Vue 3 projects, dynamic module imports, file path handling, and building scripts and components. These tools are particularly useful for developers looking to optimize their build processes and efficiently manage project dependencies.",
   "keywords": [
     "quicktools-web",

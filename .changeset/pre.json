@@ -8,5 +8,8 @@
     "@varlinor/node-tools": "1.1.0",
     "@varlinor/test": "1.0.2"
   },
-  "changesets": []
+  "changesets": [
+    "dirty-seas-cross",
+    "healthy-dolls-bathe"
+  ]
 }

@@ -155,16 +155,23 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
   const buildPromise = []
   ComponentsInfo.forEach((com) => {
     const { packageName, basedir, filename, outputPath, outputFileName } = com
-    const outDir = outputPath.substring(0,'/src'.length)
-    const entry = path.join('./', outputPath, filename)
+    // 截取掉/src，方便获得输出后的相对路径
+    const outDir = outputPath.substring('/src'.length, outputPath.length - 1)
+    // 判定入口文件，文件名规则和入口文件生成一致
+    const entryFileName = outputFileName === 'index' ? 'index' : `index-${outputFileName}`
+    // 将入口文件作为打包入口（提供了name的生成）
+    const entry = path.join('./', outputPath, entryFileName)
     const outputBase = `${DistDir}/${outDir}`
+    // 这里的name是实际输出的路径。
+    const comOutPath = `${outDir}/${outputFileName}`
+    console.log('build:', comOutPath)
     const buildOpt = getSfcBuildConfig({
       input: entry,
       output: {
         dir: outputBase,
         entryFileNames: `${outputFileName}.js`
       },
-      name: `${outDir}/${outputFileName}`,
+      name: comOutPath,
       externals: allExternals
     })
     if (buildOpt) {

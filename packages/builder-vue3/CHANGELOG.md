@@ -1,5 +1,17 @@
 # @varlinor/builder-vue3
 
+## 1.1.1-snapshot.1
+
+### Patch Changes
+
+- fix: 修复打包输出配置解析路径错误，以及更改components.json输出内容
+
+## 1.1.1-snapshot.0
+
+### Patch Changes
+
+- fix: 修复打包时相对路径解析错误的问题
+
 ## 1.1.0
 
 ### Minor Changes
