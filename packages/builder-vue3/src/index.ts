@@ -155,15 +155,16 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
   const buildPromise = []
   ComponentsInfo.forEach((com) => {
     const { packageName, basedir, filename, outputPath, outputFileName } = com
-    const entry = path.join('./src', outputPath, filename)
-    const outputBase = `${DistDir}/${outputPath}`
+    const outDir = outputPath.substring(0,'/src'.length)
+    const entry = path.join('./', outputPath, filename)
+    const outputBase = `${DistDir}/${outDir}`
     const buildOpt = getSfcBuildConfig({
       input: entry,
       output: {
         dir: outputBase,
         entryFileNames: `${outputFileName}.js`
       },
-      name: `${outputPath}/${outputFileName}`,
+      name: `${outDir}/${outputFileName}`,
       externals: allExternals
     })
     if (buildOpt) {
