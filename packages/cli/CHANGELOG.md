@@ -1,5 +1,11 @@
 # @varlinor/cli
 
+## 1.1.1
+
+### Patch Changes
+
+- f7fe329: fix: 修复打包输出配置解析路径错误，以及更改components.json输出内容
+
 ## 1.1.1-snapshot.0
 
 ### Patch Changes
