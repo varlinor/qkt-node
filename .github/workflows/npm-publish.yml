@@ -11,6 +11,7 @@ on:
 jobs:
   build-and-publish-npm:
     runs-on: ubuntu-latest
+    environment: publish_npm
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -20,7 +21,7 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-          caceh: 'pnpm'
+          cache: 'pnpm'
       - run: pnpm install
       
       - uses: changesets/action@v1
