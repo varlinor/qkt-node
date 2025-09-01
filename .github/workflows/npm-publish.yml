@@ -4,8 +4,9 @@
 name: Build qkt-node packages and publish
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main # 通常在代码推送到主分支时触发
 
 jobs:
   build-and-publish-npm:
