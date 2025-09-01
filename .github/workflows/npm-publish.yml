@@ -12,7 +12,6 @@ jobs:
   build-and-publish-npm:
     runs-on: ubuntu-latest
     steps:
-      - name: Env preparing
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
         with:
@@ -24,7 +23,6 @@ jobs:
           caceh: 'pnpm'
       - run: pnpm install
       
-      - name: Build packages and publish
       - uses: changesets/action@v1
       - run: pnpm run release
         env:
