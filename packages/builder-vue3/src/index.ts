@@ -155,15 +155,29 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
   const buildPromise = []
   ComponentsInfo.forEach((com) => {
     const { packageName, basedir, filename, outputPath, outputFileName } = com
-    const entry = path.join('./src', outputPath, filename)
-    const outputBase = `${DistDir}/${outputPath}`
+    // 截取掉/src，方便获得输出后的相对路径
+    const outDir = outputPath.substring('/src'.length, outputPath.length)
+    // 判定入口文件，包含两部分，index.vue和其他js/ts的入口文件，其文件名与生成时规则一致
+    // 特别注意：因为vite默认不添加vue文件省略后缀的支持，因此vue文件作为入口，需要显示提供文件名。
+    const entryFileName =
+      filename === 'index.vue'
+        ? filename
+        : outputFileName === 'index'
+          ? 'index'
+          : `index-${outputFileName}`
+    // 将入口文件作为打包入口（提供了name的生成）
+    const entry = path.join('./', outputPath, entryFileName)
+    const outputBase = `${DistDir}/${outDir}`
+    // 这里的name是实际输出的路径。
+    const comOutPath = `${outDir}/${outputFileName}`
+    console.log('build:', comOutPath)
     const buildOpt = getSfcBuildConfig({
       input: entry,
       output: {
         dir: outputBase,
         entryFileNames: `${outputFileName}.js`
       },
-      name: `${outputPath}/${outputFileName}`,
+      name: comOutPath,
       externals: allExternals
     })
     if (buildOpt) {

@@ -50,7 +50,7 @@ export const svgBuilder = (path: string, prefix = 'local') => {
   const iconNames: string[] = []
   const res = findSvgFile(path,prefix,iconNames)
   return {
-    name: 'rts-plugin:svg-transform',
+    name: 'qkt-plugin:svg-transform',
     transformIndexHtml(html: string) {
       /* eslint-disable */
       return html.replace(

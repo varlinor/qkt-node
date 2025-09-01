@@ -69,7 +69,7 @@ export async function generateSfcDefineAndEntryFiles(
         importPath: `./${filename}`,
         outputPath: relatedParentPath,
       }
-      // 判断文件名
+      // 判断文件名，注意：这里的 outputFileName 用于打包输出的文件名，因此入口文件生成时，单独根据index来判定
       if ('index.vue' === filename) {
         // 本身就是可以作为入口文件，打包成index.js，因本身是
         info.exportName = `${prefix}${upperFirst(camelCase(parentDirName))}`
@@ -82,7 +82,7 @@ export async function generateSfcDefineAndEntryFiles(
       }else{
         // 如果父路径下存在多个打包文件，则生成index-文件名.js
         info.exportName = `${prefix}${upperFirst(camelCase(name))}`
-        info.outputFileName = `index-${name}`
+        info.outputFileName = name
         entryGenArr.push(info)
       }
       newDefs.push(info)
@@ -91,7 +91,8 @@ export async function generateSfcDefineAndEntryFiles(
     if(isOutputEntry && !!entryGenArr.length){
         // 生成入口文件
       entryGenArr.forEach((item)=>{
-        const entryFilePath = path.join(packageRoot, item.outputPath, `${item.outputFileName}${srcScriptSuffix}`)
+        const entryFileName = item.outputFileName ==='index' ? 'index' : `index-${item.outputFileName}`
+        const entryFilePath = path.join(packageRoot, item.outputPath, `${entryFileName}${srcScriptSuffix}`)
         if (!fs.existsSync(entryFilePath)) {
           // 生成entry文件
           const entryContent = formatEntryContent({
@@ -165,7 +166,8 @@ function formatComponentDefines(mode:string = 'merge',
       })
       // 只在pre中存在
       if(!cur){
-        const entryFile = path.join(packageRoot, outputPath, `${outputFileName}${suffix}`)
+        const entryFileName = outputFileName ==='index' ? 'index' : `index-${outputFileName}`
+        const entryFile = path.join(packageRoot, outputPath, `${entryFileName}${suffix}`)
         // 检查pre中的入口文件是否存在
         if(fs.existsSync(entryFile) || filename ==='index.vue'){
           newComDefs.push(preInf)

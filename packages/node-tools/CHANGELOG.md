@@ -1,5 +1,11 @@
 # @varlinor/node-tools
 
+## 1.2.0
+
+### Minor Changes
+
+- chore: 调整版本号
+
 ## 1.1.0
 
 ### Minor Changes

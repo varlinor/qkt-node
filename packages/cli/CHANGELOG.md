@@ -1,5 +1,28 @@
 # @varlinor/cli
 
+## 1.2.0
+
+### Minor Changes
+
+- chore: 调整版本号
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@1.2.0
+
+## 1.1.1
+
+### Patch Changes
+
+- f7fe329: fix: 修复打包输出配置解析路径错误，以及更改components.json输出内容
+
+## 1.1.1-snapshot.0
+
+### Patch Changes
+
+- fix: 修复打包输出配置解析路径错误，以及更改components.json输出内容
+
 ## 1.1.0
 
 ### Minor Changes

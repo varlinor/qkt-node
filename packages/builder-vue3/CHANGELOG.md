@@ -1,5 +1,42 @@
 # @varlinor/builder-vue3
 
+## 1.2.0
+
+### Minor Changes
+
+- chore: 调整版本号
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@1.2.0
+
+## 1.1.1
+
+### Patch Changes
+
+- fix: 解决打包时index.vue缺少文件后缀时报错的bug
+- f7fe329: fix: 修复打包输出配置解析路径错误，以及更改components.json输出内容
+- f7fe329: fix: 修复打包时相对路径解析错误的问题
+
+## 1.1.1-snapshot.2
+
+### Patch Changes
+
+- fix: 解决打包时index.vue缺少文件后缀时报错的bug
+
+## 1.1.1-snapshot.1
+
+### Patch Changes
+
+- fix: 修复打包输出配置解析路径错误，以及更改components.json输出内容
+
+## 1.1.1-snapshot.0
+
+### Patch Changes
+
+- fix: 修复打包时相对路径解析错误的问题
+
 ## 1.1.0
 
 ### Minor Changes
