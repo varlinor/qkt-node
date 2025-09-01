@@ -28,7 +28,7 @@ const trySrcResolve = async (srcPath, context, importer, options) => {
 export function vue3SfcAdapter(scopes: string[]) {
   let curAlias = []
   return {
-    name: 'rts-plugin:vue3-sfc-adapter',
+    name: 'qkt-plugin:vue3-sfc-adapter',
     configResolved(config) {
       const {
         resolve: { alias }
