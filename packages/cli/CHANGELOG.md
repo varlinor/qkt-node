@@ -1,5 +1,16 @@
 # @varlinor/cli
 
+## 1.2.0
+
+### Minor Changes
+
+- chore: 调整版本号
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@1.2.0
+
 ## 1.1.1
 
 ### Patch Changes
