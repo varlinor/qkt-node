@@ -48,7 +48,7 @@
     "fs-extra": "^11.2.0",
     "lodash-es": "^4.17.21",
     "postcss-preset-env": "^10.0.2",
-    "vite": "^5.2.13",
+    "vite": "^5.4.20",
     "vite-plugin-css-injected-by-js": "^3.5.1"
   },
   "peerDependencies": {
