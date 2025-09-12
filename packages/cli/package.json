@@ -1,6 +1,6 @@
 {
   "name": "@varlinor/cli",
-  "version": "1.2.0",
+  "version": "2.0.0-snapshot.0",
   "description": "This package provides a set of command-line tools for managing and building front-end projects. These tools include functionalities for cleaning the node_modules directory, creating and managing project versions, removing Git tags, and generating Vue component definition files and entry files. With these CLI tools, developers can more efficiently maintain project structure, manage version control, automate common development tasks, and simplify the generation and management of components.",
   "keywords": [
     "CLI tools",
@@ -41,14 +41,14 @@
   },
   "dependencies": {
     "@varlinor/node-tools": "workspace:*",
-    "chalk": "^5.3.0",
-    "commander": "^11.0.0",
-    "fs-extra": "^11.1.1",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.0",
+    "fs-extra": "^11.2.0",
     "lodash-es": "^4.17.21",
-    "semver": "^7.6.2",
-    "shelljs": "^0.8.5",
-    "simple-git": "^3.25.0",
-    "yaml": "^2.3.4"
+    "semver": "^7.7.2",
+    "shelljs": "^0.10.0",
+    "simple-git": "^3.28.0",
+    "yaml": "^2.8.1"
   },
   "repository": {
     "type": "git",
@@ -59,6 +59,6 @@
   },
   "homepage": "https://github.com/varlinor/qkt-node",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   }
 }

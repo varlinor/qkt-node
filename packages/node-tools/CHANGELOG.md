@@ -1,5 +1,11 @@
 # @varlinor/node-tools
 
+## 2.0.0-snapshot.0
+
+### Major Changes
+
+- chore: update dependencies
+
 ## 1.2.0
 
 ### Minor Changes
