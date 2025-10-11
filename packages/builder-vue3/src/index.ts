@@ -18,7 +18,8 @@ declare interface SfcBuildOptions {
   input: string
   name: string
   externals: any[]
-  output: { [key: string]: any }
+  output: { [key: string]: any },
+  plugins?: any[]
 }
 interface PackEntry {
   name: string
@@ -30,6 +31,8 @@ declare interface PackOption {
   alias?: Record<string, any>
   replace?: Record<string, string>
   clean?: boolean
+  plugins?: any[]
+  hooks?: Record<string, any>
 }
 declare interface ScriptBuildOptions {
   entries: PackEntry[]
@@ -41,6 +44,7 @@ declare interface ScriptBuildOptions {
   }
   replace?: Record<string, any>
   alias?: Record<string, any>
+  hooks?: Record<string, any>
 }
 
 /**
@@ -49,11 +53,11 @@ declare interface ScriptBuildOptions {
  * @returns
  */
 export function getSfcBuildConfig(opts: SfcBuildOptions) {
-  const { input, name, externals, output } = opts
+  const { input, name, externals, output, plugins } = opts
   if (!input || !name) return null
   return defineConfig({
     configFile: false,
-    plugins: [vue(), cssInject()],
+    plugins: [...plugins, vue(), cssInject()],
     css: {
       preprocessorOptions: { css: { charset: false } },
       postcss: {
@@ -87,7 +91,7 @@ export function getScriptBuildConfig(opts: ScriptBuildOptions) {
   if (!opts.entries || !opts.externals) {
     throw new Error('entries or externals is empty, please check!')
   }
-  const { entries, externals, clean, rollup, alias, replace } = opts
+  const { entries, externals, clean, rollup, alias, replace, hooks } = opts
   const buildOpt = merge(
     {
       failOnWarn: false,
@@ -107,7 +111,8 @@ export function getScriptBuildConfig(opts: ScriptBuildOptions) {
       clean,
       rollup,
       alias: alias || {},
-      replace: replace || {}
+      replace: replace || {},
+      hooks  // unbuild 提供的hooks
     }
   )
   return buildOpt
@@ -128,7 +133,8 @@ export async function buildScripts(packageRoot: string, packOption: PackOption) 
     clean: packOption.clean,
     externals: externals,
     replace: packOption.replace || {},
-    alias: packOption.alias || {}
+    alias: packOption.alias || {},
+    hooks: packOption.hooks || {}
   })
 
   console.log('Ready to build script files ...')
@@ -147,6 +153,8 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
   const ComponentsInfo = checkAndLoadComDefs(rootDir)
   // 获取externals
   const allExternals = checkAndLoadExternals(rootDir, packOption.externals)
+  // 额外的插件
+  const extraPlugins = packOption.plugins || []
 
   const BaseDir = `${rootDir}/src`
   const DistDir = `${rootDir}/dist`
@@ -178,9 +186,11 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
         entryFileNames: `${outputFileName}.js`
       },
       name: comOutPath,
-      externals: allExternals
+      externals: allExternals,
+      plugins: extraPlugins
     })
     if (buildOpt) {
+      // 通过 vite 编译 SFC
       buildPromise.push(buildVue(buildOpt))
     }
   })
@@ -191,11 +201,12 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
   if (packOption.entries) {
     const entries = []
     entries.push(...packOption.entries)
-
+    // 通过 unbuild 编译纯 js/ts
     await buildScripts(packageRoot, {
       entries,
       externals: allExternals,
-      clean: false
+      clean: false,
+      hooks: packOption.hooks
     } as PackOption)
   }
 }
