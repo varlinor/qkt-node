@@ -1,5 +1,58 @@
 # @varlinor/builder-vue3
 
+## 2.0.0
+
+### Major Changes
+
+- 62470b9: chore: update dependencies
+
+### Patch Changes
+
+- feat: support hooks for build scripts
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies [62470b9]
+- Updated dependencies
+  - @varlinor/node-tools@2.0.0
+
+## 2.0.0-snapshot.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.0.0-snapshot.3
+
+## 2.0.0-snapshot.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.0.0-snapshot.2
+
+## 2.0.0-snapshot.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.0.0-snapshot.1
+
+## 2.0.0-snapshot.1
+
+### Patch Changes
+
+- feat: support hooks for build scripts
+
+## 2.0.0-snapshot.0
+
+### Major Changes
+
+- chore: update dependencies
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.0.0-snapshot.0
+
 ## 1.2.0
 
 ### Minor Changes

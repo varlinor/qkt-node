@@ -9,7 +9,8 @@ const isTargetImporter = (p: string): string => {
   )
 }
 /**
- * 该插件无法生效，存在问题
+ * 该插件暂时无法处理带参数的路径映射
+ * 后续将switch中的判定增加去除路径上的参数，再进行判定
  * @param param0
  * @returns
  */

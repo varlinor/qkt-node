@@ -1,5 +1,41 @@
 # @varlinor/node-tools
 
+## 2.0.0
+
+### Major Changes
+
+- 62470b9: chore: update dependencies
+
+### Patch Changes
+
+- fix: resolve multiple scope filter
+- chore: modify exports formart in package.json
+- feat: add dir import resolve plugin
+
+## 2.0.0-snapshot.3
+
+### Patch Changes
+
+- fix: resolve multiple scope filter
+
+## 2.0.0-snapshot.2
+
+### Patch Changes
+
+- chore: modify exports formart in package.json
+
+## 2.0.0-snapshot.1
+
+### Patch Changes
+
+- feat: add dir import resolve plugin
+
+## 2.0.0-snapshot.0
+
+### Major Changes
+
+- chore: update dependencies
+
 ## 1.2.0
 
 ### Minor Changes
