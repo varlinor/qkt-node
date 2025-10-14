@@ -53,7 +53,7 @@ declare interface ScriptBuildOptions {
  * @returns
  */
 export function getSfcBuildConfig(opts: SfcBuildOptions) {
-  const { input, name, externals, output, plugins } = opts
+  const { input, name, externals, output, plugins,hooks } = opts
   if (!input || !name) return null
   return defineConfig({
     configFile: false,

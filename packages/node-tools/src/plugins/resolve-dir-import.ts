@@ -1,12 +1,14 @@
 import path from 'node:path'
-import fs from 'fs-extra'
+import fs, { Dirent } from 'fs-extra'
 import { parse } from 'acorn'
 import { simple as walk } from 'acorn-walk'
 import MagicString from 'magic-string'
+import { loadJsonFile } from '../modules/file-helper'
 
 export interface ResolveDirImportOptions {
-  scopes?: string[]
   basePath: string
+  subPackageBase: string
+  scopes?: string[]
   exts?: string[]
 }
 
@@ -29,9 +31,49 @@ function resolveDirIndex(basePath: string): string | null {
   return null
 }
 
+/**
+ * 根据指定的子包根目录，扫描出所有子包及路径的映射关系
+ * @param parentPath
+ */
+function scanPackages(parentPath?: string): Record<string, any> {
+  const files: Array<Dirent> = fs.readdirSync(parentPath, { withFileTypes: true })
+  const pkgMap: Record<string, any> = {}
+  if (files.length) {
+    files.forEach((file: Dirent) => {
+      const filePath: string = path.join(parentPath, file.name)
+      if (file.isDirectory()) {
+        const pkgPath = path.join(filePath, 'package.json')
+        if (fs.existsSync(pkgPath)) {
+          const pkgObj = loadJsonFile(pkgPath)
+          if (!pkgObj) {
+            console.error('Cannot find package.json, please check your configuration!')
+          }
+          pkgMap[pkgObj.name] = {
+            name: pkgObj.name,
+            dirName: file.name,
+            pkgPath: pkgPath,
+            pkgRoot: filePath
+          }
+        }
+      }
+    })
+  }
+  return pkgMap
+}
+
 export function resolveDirImport(options?: ResolveDirImportOptions) {
-  const { basePath, scopes, exts = ['.ts', '.js', '.vue', '.tsx', '.jsx'] } = options
-  const [rootDir, curDir] = basePath.split('packages/')
+  const {
+    basePath,
+    scopes,
+    exts = ['.ts', '.js', '.vue', '.tsx', '.jsx'],
+    subPackageBase = 'packages/'
+  } = options
+  const [rootDir, curDir] = basePath.split(subPackageBase)
+
+  // 扫描packages目录，保存目录和包名的map
+  const subPackageInfos = scanPackages(path.join(rootDir, subPackageBase))
+  // console.log('current sub package infos:', subPackageInfos)
+
   return {
     name: 'qkt-plugin:resolve-dir-import',
     enforce: 'pre',
@@ -51,20 +93,21 @@ export function resolveDirImport(options?: ResolveDirImportOptions) {
       /**
        * source 是 实际引用的uri
        * 处理逻辑：
-       * 1、将指定scope的截断，注意保留原本的source
-       * 2、将basePath 按照packages截断，找到多包的根目录
-       * 3、拼接rootDir 和 packages后的目录名加src，判断文件
-       * 4、如果需要拼接index，则在原本的source上添加/index
+       * 1、将指定 scope 的截断，注意保留原本的source
+       * 2、将 basePath 按照 packages 截断，找到多包的根目录
+       * 3、扫描 packages 根目录，获取所有包的src和目录名对应关系
+       * 4、拼接 rootDir 和 packages 后的目录名加src，判断文件
+       * 5、如果需要拼接index，则在原本的source上添加/index
        */
       const checkAndRewrite = (source: string, start: number, end: number) => {
         if (!scopes?.some((s) => source.startsWith(s))) return
         // console.log('target source:', source)
-        // 去掉 scope 前缀，定位到本地目录
-        for (let i = 0; i < scopes.length; i++) {
-          const s = scopes[i]
-          if (source.startsWith(s)) {
-            const subPath = source.replace(s, '').replace(curDir, `${curDir}/src`)
-            const targetBase = path.resolve(rootDir, 'packages/', subPath)
+        // 基于subPackageInfos，定位到本地目录
+        for (let key in subPackageInfos) {
+          const item = subPackageInfos[key]
+          if (source.includes(item.name)) {
+            const subPath = source.replace(item.name, '')
+            const targetBase = path.join(item.pkgRoot, 'src', subPath)
             const newPath = resolveDirIndex(targetBase)
             if (newPath) {
               // 有返回值也就是需要添加index
