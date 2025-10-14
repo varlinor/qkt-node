@@ -1,5 +1,12 @@
-import { createFilter } from '@rollup/pluginutils'
+// import { createFilter } from '@rollup/pluginutils'
 import { normalizePath } from '../modules/path-helper'
+
+export interface DynamicImportOptions {
+  include?: any
+  exclude?: any
+  componentsMap?: Record<string, any>
+  presetModules?: any[]
+}
 
 const isTargetImporter = (p: string): string => {
   const buildCachePath = '@varlinor/builder-vue3/utils/dynamic-import'.replace(/\//g, '_')
@@ -14,8 +21,9 @@ const isTargetImporter = (p: string): string => {
  * @param param0
  * @returns
  */
-export function dynamicImport({ include, exclude, componentsMap, presetModules } = {}) {
-  const filter = createFilter(include, exclude)
+export function dynamicImport(options: DynamicImportOptions = {}) {
+  const { /* include, exclude, */ componentsMap, presetModules } = options
+  // const filter = createFilter(include, exclude)
   return {
     name: 'qkt-plugin:dynamic-import',
     enforce: 'pre',
