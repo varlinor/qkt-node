@@ -1,5 +1,11 @@
 # @varlinor/node-tools
 
+## 2.0.2
+
+### Patch Changes
+
+- feat: support to create hook for unbuild and plugin for vite.
+
 ## 2.0.1
 
 ### Patch Changes

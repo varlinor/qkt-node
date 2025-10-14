@@ -76,7 +76,7 @@ export function resolveDirImport(options?: ResolveDirImportOptions) {
 
   return {
     name: 'qkt-plugin:resolve-dir-import',
-    enforce: 'pre',
+    apply: 'build',
     async transform(code, id) {
       // 只处理 TS/JS/Vue 源码，不处理 node_modules
       if (id.includes('node_modules')) return null
