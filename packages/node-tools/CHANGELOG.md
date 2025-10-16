@@ -1,5 +1,11 @@
 # @varlinor/node-tools
 
+## 2.1.0
+
+### Minor Changes
+
+- fix: 解决AST错误解析index.vue 报错的问题
+
 ## 2.0.2
 
 ### Patch Changes
