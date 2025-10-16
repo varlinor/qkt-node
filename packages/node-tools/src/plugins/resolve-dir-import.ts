@@ -80,7 +80,8 @@ export function resolveDirImport(options?: ResolveDirImportOptions) {
     async transform(code, id) {
       // 只处理 TS/JS/Vue 源码，不处理 node_modules
       if (id.includes('node_modules')) return null
-      if (!/\.(ts|js|vue)$/.test(id)) return null
+      // 注意，vue的SFC不能进行ast解析
+      if (!/\.(ts|js)$/.test(id)) return null
 
       const ast = parse(code, {
         ecmaVersion: 'latest',
