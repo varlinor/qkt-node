@@ -18,12 +18,17 @@ declare interface SfcBuildOptions {
   input: string
   name: string
   externals: any[]
-  output: { [key: string]: any },
+  output: { [key: string]: any }
   plugins?: any[]
 }
 interface PackEntry {
   name: string
   input: string
+}
+
+interface StaticResource {
+  src: string
+  dest: string
 }
 declare interface PackOption {
   externals?: string[] | RegExp[]
@@ -33,6 +38,7 @@ declare interface PackOption {
   clean?: boolean
   plugins?: any[]
   hooks?: Record<string, any>
+  staticResources?: StaticResource[] // 拷贝的资源
 }
 declare interface ScriptBuildOptions {
   entries: PackEntry[]
@@ -53,7 +59,7 @@ declare interface ScriptBuildOptions {
  * @returns
  */
 export function getSfcBuildConfig(opts: SfcBuildOptions) {
-  const { input, name, externals, output, plugins,hooks } = opts
+  const { input, name, externals, output, plugins, hooks } = opts
   if (!input || !name) return null
   return defineConfig({
     configFile: false,
@@ -112,7 +118,7 @@ export function getScriptBuildConfig(opts: ScriptBuildOptions) {
       rollup,
       alias: alias || {},
       replace: replace || {},
-      hooks  // unbuild 提供的hooks
+      hooks // unbuild 提供的hooks
     }
   )
   return buildOpt
@@ -139,7 +145,25 @@ export async function buildScripts(packageRoot: string, packOption: PackOption) 
 
   console.log('Ready to build script files ...')
   await buildJs(null, false, jsBuildOpt)
+  copyStaticResources(packOption.staticResources)
   console.log('Build script files successfully!')
+}
+
+/**
+ * 拷贝静态资源
+ * @param staticResources
+ */
+function copyStaticResources(staticResources: StaticResource[]) {
+  if (!!staticResources && staticResources.length) {
+    staticResources.forEach(({ src, dest }) => {
+      const targetSrc = path.join(rootDir, src)
+      const targetDest = path.join(rootDir, 'dist', dest)
+      if (fs.existsSync(targetSrc)) {
+        console.log('copy [%s] to [dist/%s]!', targetSrc, targetDest)
+        fs.copySync(targetSrc, targetDest)
+      }
+    })
+  }
 }
 
 /**
@@ -209,6 +233,8 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
       hooks: packOption.hooks
     } as PackOption)
   }
+  // 因为上面buildScripts中不带staticResources 参数，因此不会重复执行
+  copyStaticResources(packOption.staticResources)
 }
 
 /**
