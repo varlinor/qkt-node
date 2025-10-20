@@ -1,6 +1,6 @@
 {
   "name": "@varlinor/builder-vue3",
-  "version": "2.1.0",
+  "version": "2.1.5",
   "description": "This package provides a set of Rollup and Vite configurations and utility functions tailored for Vue.js development environments, focusing on simplifying the build process for front-end development. It includes modules for configuring Rollup and Vite for Vue 2 and Vue 3 projects, dynamic module imports, file path handling, and building scripts and components. These tools are particularly useful for developers looking to optimize their build processes and efficiently manage project dependencies.",
   "keywords": [
     "quicktools-web",
@@ -46,13 +46,15 @@
     "access": "public"
   },
   "dependencies": {
+    "@rollup/plugin-replace": "^6.0.2",
     "@varlinor/node-tools": "workspace:*",
     "@vitejs/plugin-vue": "^5.2.4",
     "fs-extra": "^11.2.0",
     "lodash-es": "^4.17.21",
     "postcss-preset-env": "^10.3.1",
     "vite": "^5.4.20",
-    "vite-plugin-css-injected-by-js": "^3.5.2"
+    "vite-plugin-css-injected-by-js": "^3.5.2",
+    "unbuild": "^3.6.1"
   },
   "peerDependencies": {
     "@vitejs/plugin-vue": ">5.0.0",

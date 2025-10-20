@@ -1,5 +1,35 @@
 # @varlinor/builder-vue3
 
+## 2.1.5
+
+### Patch Changes
+
+- fix: 修复sfc打包时追加replace插件
+
+## 2.1.4
+
+### Patch Changes
+
+- fix: support replace config in build period for vite
+
+## 2.1.3
+
+### Patch Changes
+
+- fix: 修复拷贝静态资源路径问题
+
+## 2.1.2
+
+### Patch Changes
+
+- fix: 修改包的根路径缺失的bug
+
+## 2.1.1
+
+### Patch Changes
+
+- feat: 追加静态资源拷贝的功能
+
 ## 2.1.0
 
 ### Minor Changes

@@ -10,6 +10,7 @@ import {
 import { build as buildJs } from 'unbuild'
 import { build as buildVue, defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import replacePlugin from '@rollup/plugin-replace'
 import postcssPresetEnv from 'postcss-preset-env'
 import cssInject from 'vite-plugin-css-injected-by-js'
 import { merge, uniq } from 'lodash-es'
@@ -59,11 +60,20 @@ declare interface ScriptBuildOptions {
  * @returns
  */
 export function getSfcBuildConfig(opts: SfcBuildOptions) {
-  const { input, name, externals, output, plugins, hooks } = opts
+  const { input, name, externals, output, plugins, replace, hooks } = opts
   if (!input || !name) return null
+  const pluginArr = [...plugins, vue()]
+  if (!!replace) {
+    pluginArr.push(
+      replacePlugin({
+        preventAssingment: true, // 避免破坏赋值操作。
+        values: replace // 待替换的隐射
+      })
+    )
+  }
   return defineConfig({
     configFile: false,
-    plugins: [...plugins, vue(), cssInject()],
+    plugins: [...pluginArr, cssInject()],
     css: {
       preprocessorOptions: { css: { charset: false } },
       postcss: {
@@ -145,7 +155,7 @@ export async function buildScripts(packageRoot: string, packOption: PackOption) 
 
   console.log('Ready to build script files ...')
   await buildJs(null, false, jsBuildOpt)
-  copyStaticResources(packOption.staticResources)
+  copyStaticResources(rootDir, packOption.staticResources)
   console.log('Build script files successfully!')
 }
 
@@ -153,11 +163,11 @@ export async function buildScripts(packageRoot: string, packOption: PackOption) 
  * 拷贝静态资源
  * @param staticResources
  */
-function copyStaticResources(staticResources: StaticResource[]) {
+function copyStaticResources(packageRoot: string, staticResources: StaticResource[]) {
   if (!!staticResources && staticResources.length) {
     staticResources.forEach(({ src, dest }) => {
-      const targetSrc = path.join(rootDir, src)
-      const targetDest = path.join(rootDir, 'dist', dest)
+      const targetSrc = path.join(packageRoot, src)
+      const targetDest = path.join(packageRoot, 'dist', dest)
       if (fs.existsSync(targetSrc)) {
         console.log('copy [%s] to [dist/%s]!', targetSrc, targetDest)
         fs.copySync(targetSrc, targetDest)
@@ -202,7 +212,7 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
     const outputBase = `${DistDir}/${outDir}`
     // 这里的name是实际输出的路径。
     const comOutPath = `${outDir}/${outputFileName}`
-    console.log('build:', comOutPath)
+    // console.log('build:', comOutPath)
     const buildOpt = getSfcBuildConfig({
       input: entry,
       output: {
@@ -211,7 +221,8 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
       },
       name: comOutPath,
       externals: allExternals,
-      plugins: extraPlugins
+      plugins: extraPlugins,
+      replace: packOption.replace
     })
     if (buildOpt) {
       // 通过 vite 编译 SFC
@@ -230,11 +241,12 @@ export async function buildPackage(packageRoot: string, packOption: PackOption) 
       entries,
       externals: allExternals,
       clean: false,
+      replace: packOption.replace,
       hooks: packOption.hooks
     } as PackOption)
   }
   // 因为上面buildScripts中不带staticResources 参数，因此不会重复执行
-  copyStaticResources(packOption.staticResources)
+  copyStaticResources(packageRoot, packOption.staticResources)
 }
 
 /**

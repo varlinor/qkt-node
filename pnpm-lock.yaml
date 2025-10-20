@@ -126,6 +126,9 @@ importers:
 
   packages/builder-vue3:
     dependencies:
+      '@rollup/plugin-replace':
+        specifier: ^6.0.2
+        version: 6.0.2(rollup@4.52.4)
       '@varlinor/node-tools':
         specifier: workspace:*
         version: link:../node-tools
@@ -141,6 +144,9 @@ importers:
       postcss-preset-env:
         specifier: ^10.3.1
         version: 10.4.0(postcss@8.5.6)
+      unbuild:
+        specifier: ^3.6.1
+        version: 3.6.1(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))
       vite:
         specifier: ^5.4.20
         version: 5.4.20(@types/node@24.7.1)
