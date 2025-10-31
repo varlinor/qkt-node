@@ -1,5 +1,59 @@
 # @varlinor/builder-vue3
 
+## 2.2.0
+
+### Minor Changes
+
+- fix: 修改ts代码中的glob处理机制
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @varlinor/node-tools@2.2.0
+
+## 2.2.0-snapshot.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.2.0-snapshot.4
+
+## 2.2.0-snapshot.3
+
+### Minor Changes
+
+- fix: 修改ts代码中的glob处理机制
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.2.0-snapshot.3
+
+## 2.1.6-snapshot.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.1.1-snapshot.2
+
+## 2.1.6-snapshot.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.1.1-snapshot.1
+
+## 2.1.6-snapshot.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.1.1-snapshot.0
+
 ## 2.1.5
 
 ### Patch Changes

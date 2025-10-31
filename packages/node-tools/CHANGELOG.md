@@ -1,5 +1,48 @@
 # @varlinor/node-tools
 
+## 2.2.0
+
+### Minor Changes
+
+- fix: 修改ts代码中的glob处理机制
+
+### Patch Changes
+
+- feat: 支持二次开发包中动态加载插件的替换
+- fix: 更改组件扫描的匹配范围，扩大到已打包的组件
+- fix: 调整解析glob时输出的内容
+- fix: 修正动态引用的错误内容
+
+## 2.2.0-snapshot.4
+
+### Patch Changes
+
+- fix: 调整解析glob时输出的内容
+
+## 2.2.0-snapshot.3
+
+### Minor Changes
+
+- fix: 修改ts代码中的glob处理机制
+
+## 2.1.1-snapshot.2
+
+### Patch Changes
+
+- fix: 修正动态引用的错误内容
+
+## 2.1.1-snapshot.1
+
+### Patch Changes
+
+- fix: 更改组件扫描的匹配范围，扩大到已打包的组件
+
+## 2.1.1-snapshot.0
+
+### Patch Changes
+
+- feat: 支持二次开发包中动态加载插件的替换
+
 ## 2.1.0
 
 ### Minor Changes
