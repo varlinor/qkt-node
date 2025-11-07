@@ -1,31 +1,106 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+ name: Build qkt-node packages and publish
+ 
 
-name: Build qkt-node packages and publish
 
 on:
+
   push:
+  
     branches:
-      - main # 通常在代码推送到主分支时触发
+    
+      - main
+      
+
 
 jobs:
+
   build-and-publish-npm:
+  
     runs-on: ubuntu-latest
+    
     environment: publish_npm
+    
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: https://registry.npmjs.org/
-          cache: 'pnpm'
-      - run: pnpm install
+    
+      - name: Checkout
       
-      - uses: changesets/action@v1
-      - run: pnpm run release
+        uses: actions/checkout@v4
+        
+
+
+      - name: Setup pnpm
+      
+        uses: pnpm/action-setup@v4
+        
+        with:
+        
+          version: 8
+          
+
+
+      - name: Setup Node.js
+      
+        uses: actions/setup-node@v4
+        
+        with:
+        
+          node-version: '20'
+          
+          registry-url: 'https://registry.npmjs.org'
+          
+          cache: 'pnpm'
+          
+
+
+      - name: Install dependencies
+      
+        run: pnpm install
+        
+
+
+      - name: Create Release Pull Request or Publish to npm
+      
+        id: changesets
+        
+        uses: changesets/action@v1
+        
+        with:
+        
+          publish: pnpm run release
+          
         env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-          NODE_TOKEN: ${{secrets.NPM_TOKEN}}
+        
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
