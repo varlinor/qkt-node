@@ -50,11 +50,10 @@
     "@varlinor/node-tools": "workspace:*",
     "@vitejs/plugin-vue": "^5.2.4",
     "fs-extra": "^11.2.0",
-    "lodash-es": "^4.17.21",
+    "lodash-es": "^4.17.23",
     "postcss-preset-env": "^10.3.1",
-    "vite": "^5.4.20",
-    "vite-plugin-css-injected-by-js": "^3.5.2",
-    "unbuild": "^3.6.1"
+    "vite": "^5.4.21",
+    "vite-plugin-css-injected-by-js": "^3.5.2"
   },
   "peerDependencies": {
     "@vitejs/plugin-vue": ">5.0.0",
