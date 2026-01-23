@@ -1,6 +1,19 @@
 # varlinor-node
 
-for node environment, includes node-tools, builder, cli, etc.
+一套用于 Node.js 环境的工具集，专注于简化 Vue.js 项目的构建流程。包含构建工具、CLI 命令行工具和实用函数库，特别适用于 Vite + Vue 3 项目。
+
+A toolkit for Node.js environments, focusing on simplifying the build process for Vue.js projects. Includes build tools, CLI utilities, and utility function libraries, especially suitable for Vite + Vue 3 projects.
+
+## Requirements
+
+- **Node.js**: >= 18.0.0
+- **Package Manager**: npm, pnpm, or yarn
+- **Vite**: >= 5.0.0 (for builder-vue3)
+- **Vue**: >= 3.0.0 (for builder-vue3)
+
+详细的环境要求和兼容性说明，请查看 [系统要求文档](./docs/requirements.md) 和 [版本兼容性说明](./docs/compatibility.md)。
+
+For detailed requirements and compatibility information, please see [Requirements](./docs/requirements.md) and [Compatibility Guide](./docs/compatibility.md).
 
 ## Package Introduce
 
@@ -29,10 +42,16 @@ for node environment, includes node-tools, builder, cli, etc.
 这个包提供命令行工具
 相关介绍，详见[cli Readme.md](./packages/cli/README.md)
 
+## Documentation
+
+- [系统要求和环境依赖](./docs/requirements.md) - System Requirements
+- [版本兼容性说明](./docs/compatibility.md) - Version Compatibility
+- [常见问题/故障排除](./docs/troubleshooting.md) - Troubleshooting
+
 ## Contributing
 
 Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) before submitting a pull request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.

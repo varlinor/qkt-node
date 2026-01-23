@@ -1,5 +1,17 @@
 # @varlinor/node-tools
 
+## 2.2.1
+
+### Patch Changes
+
+- fix: 解决路径中存在多个src导致解析失败的bug
+
+## 2.2.1-snapshot.0
+
+### Patch Changes
+
+- fix: 解决路径中存在多个src导致解析失败的bug
+
 ## 2.2.0
 
 ### Minor Changes

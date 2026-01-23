@@ -4,6 +4,23 @@
 
 This package provides a set of Vite configurations and utility functions tailored for Vue.js development environments, focusing on simplifying the build process for front-end development. It includes modules for configuring Vite for Vue 3 projects, dynamic module imports, file path handling, and building scripts and components. These tools are particularly useful for developers looking to optimize their build processes and efficiently manage project dependencies.
 
+## Requirements
+
+- **Node.js**: >= 18.0.0
+- **Vite**: >= 5.0.0
+- **Vue**: >= 3.0.0
+- **@vitejs/plugin-vue**: >= 5.0.0
+
+详细的环境要求和兼容性说明，请查看：
+- [系统要求文档](../../docs/requirements.md)
+- [版本兼容性说明](../../docs/compatibility.md)
+- [常见问题/故障排除](../../docs/troubleshooting.md)
+
+For detailed requirements and compatibility information, please see:
+- [Requirements](../../docs/requirements.md)
+- [Compatibility Guide](../../docs/compatibility.md)
+- [Troubleshooting](../../docs/troubleshooting.md)
+
 ## Installation
 
 ```bash
@@ -12,6 +29,14 @@ npm install -D @varlinor/builder-vue3
 // or
 
 pnpm add -D @varlinor/builder-vue3
+```
+
+**注意**: 还需要安装 peer dependencies：
+
+**Note**: You also need to install peer dependencies:
+
+```bash
+npm install -D vite @vitejs/plugin-vue vite-plugin-css-injected-by-js
 ```
 
 ## Usage
@@ -29,7 +54,7 @@ const allEntries = [{ name: 'register', input: 'src/register.ts' }, ...i18nFiles
 
 const packOption = {
   externals: [/^@varlinor\//],
-  enteries: allEnteries,
+  entries: allEntries,
   alias: {
     '@varlinor/module-admin': path.resolve('./src')
   }
@@ -46,15 +71,15 @@ import * as Vue3Builder from '@varlinor/builder-vue3'
 import { normalizePath } from '@varlinor/node-tools'
 
 const packageRoot = normalizePath(process.cwd())
-const allEnteries = [{ name: 'register', input: 'src/register.ts' }]
+const allEntries = [{ name: 'register', input: 'src/register.ts' }]
 
 const storeFiles = Vue3Builder.getScriptFiles(`${packageRoot}/src/stores`)
 
-allEnteries.push(...storeFiles)
+allEntries.push(...storeFiles)
 
 const packOption = {
   externals: [/^@varlinor\//],
-  enteries: allEnteries,
+  entries: allEntries,
   alias: {
     '@varlinor/core': path.resolve('./src')
   }
@@ -70,29 +95,57 @@ Vue3Builder.buildScripts(packageRoot, packOption)
 1. **getSfcBuildConfig(opts)**
 
    - **描述**: 为 Vue 3 项目生成 Vite 构建配置，支持单文件组件 (SFC) 的编译和打包。
+   - **参数**: `opts` 包含 `input`（入口文件路径）、`name`（输出名称）、`externals`（外部依赖）、`output`（输出配置）、`plugins`（额外插件）、`replace`（字符串替换映射）、`hooks`（构建钩子）。
    - **Description**: Generates Vite build configuration for Vue 3 projects, supporting the compilation and packaging of Single File Components (SFCs).
+   - **Parameters**: `opts` includes `input` (entry file path), `name` (output name), `externals` (external dependencies), `output` (output configuration), `plugins` (additional plugins), `replace` (string replacement mapping), `hooks` (build hooks).
 
 2. **getScriptBuildConfig(opts)**
 
    - **描述**: 为 Vue 3 项目生成 script 文件的打包配置。
+   - **参数**: `opts` 包含 `entries`（入口文件列表）、`externals`（外部依赖）、`clean`（是否清理输出目录）、`rollup`（Rollup 配置）、`alias`（路径别名）、`replace`（字符串替换映射）、`hooks`（构建钩子）。
    - **Description**: Generate a configuration object for packaging based on the provided task information and common options.
+   - **Parameters**: `opts` includes `entries` (entry file list), `externals` (external dependencies), `clean` (whether to clean output directory), `rollup` (Rollup configuration), `alias` (path aliases), `replace` (string replacement mapping), `hooks` (build hooks).
 
 3. **buildScripts(packageRoot, packOption)**
 
    - **描述**: 构建指定包根目录下的脚本文件，使用动态模块导入和其他构建选项。
+   - **参数**: 
+     - `packageRoot`: 包根目录路径
+     - `packOption`: 构建选项，包含 `entries`（入口文件列表）、`externals`（外部依赖）、`clean`（是否清理）、`alias`（路径别名）、`replace`（字符串替换）、`hooks`（构建钩子）、`staticResources`（静态资源拷贝配置）
    - **Description**: Builds script files in the specified package root directory, utilizing dynamic module imports and other build options.
+   - **Parameters**: 
+     - `packageRoot`: Package root directory path
+     - `packOption`: Build options including `entries` (entry file list), `externals` (external dependencies), `clean` (whether to clean), `alias` (path aliases), `replace` (string replacement), `hooks` (build hooks), `staticResources` (static resource copy configuration)
 
 4. **buildPackage(packageRoot, packOption)**
 
-   - **描述**: 构建整个包，包括组件和脚本文件，支持多种输出配置和依赖管理。
-   - **Description**: Builds the entire package, including components and script files, supporting various output configurations and dependency management.
+   - **描述**: 构建整个包，包括组件和脚本文件，支持多种输出配置和依赖管理。首先构建所有 Vue SFC 组件，然后构建脚本文件（如果提供了 `entries`）。
+   - **参数**: 
+     - `packageRoot`: 包根目录路径
+     - `packOption`: 构建选项，包含 `entries`（入口文件列表，可选）、`externals`（外部依赖）、`alias`（路径别名）、`replace`（字符串替换）、`plugins`（额外插件）、`hooks`（构建钩子）、`staticResources`（静态资源拷贝配置）
+   - **Description**: Builds the entire package, including components and script files, supporting various output configurations and dependency management. First builds all Vue SFC components, then builds script files (if `entries` is provided).
+   - **Parameters**: 
+     - `packageRoot`: Package root directory path
+     - `packOption`: Build options including `entries` (entry file list, optional), `externals` (external dependencies), `alias` (path aliases), `replace` (string replacement), `plugins` (additional plugins), `hooks` (build hooks), `staticResources` (static resource copy configuration)
 
 5. **getI18nFiles(packageRoot)**
 
-   - **描述**: 获取指定包根目录下的所有 i18n 文件，用于国际化处理。
-   - **Description**: Retrieves all i18n files in the specified package root directory for internationalization handling.
+   - **描述**: 获取指定包根目录下的所有 i18n 文件，用于国际化处理。会扫描 `i18n` 目录下的 `.ts` 文件，排除 `node_modules` 目录。
+   - **参数**: `packageRoot` - 包根目录路径
+   - **返回**: 入口文件列表，每个元素包含 `name` 和 `input` 属性
+   - **Description**: Retrieves all i18n files in the specified package root directory for internationalization handling. Scans `.ts` files in `i18n` directories, excluding `node_modules`.
+   - **Parameters**: `packageRoot` - Package root directory path
+   - **Returns**: Entry file list, each element contains `name` and `input` properties
 
 6. **getScriptFiles(packageRoot, entryFilter)**
 
-   - **描述**: 获取并过滤指定包根目录下的脚本文件，支持按条件筛选入口文件。
-   - **Description**: Retrieves and filters script files in the specified package root directory, supporting conditional entry file selection.
+   - **描述**: 获取并过滤指定包根目录下的脚本文件，支持按条件筛选入口文件。默认扫描所有 `.ts` 文件。
+   - **参数**: 
+     - `packageRoot`: 包根目录路径
+     - `entryFilter`: 可选的过滤函数，用于筛选入口文件
+   - **返回**: 入口文件列表，每个元素包含 `name` 和 `input` 属性
+   - **Description**: Retrieves and filters script files in the specified package root directory, supporting conditional entry file selection. By default scans all `.ts` files.
+   - **Parameters**: 
+     - `packageRoot`: Package root directory path
+     - `entryFilter`: Optional filter function for selecting entry files
+   - **Returns**: Entry file list, each element contains `name` and `input` properties

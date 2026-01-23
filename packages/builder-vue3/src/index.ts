@@ -282,7 +282,8 @@ export function getScriptFiles(packageRoot: string, entryFilter?: FileFilter) {
     if (!parentP.endsWith('/')) {
       parentP += '/'
     }
-    const srcIndex = parentP.indexOf('src/')
+    // 使用 lastIndexOf 来找到最后一个 src/ 的位置，避免父路径中存在 src/ 时匹配错误
+    const srcIndex = parentP.lastIndexOf('src/')
     let pPath = parentP
     if (srcIndex !== -1) {
       pPath = parentP.slice(srcIndex + 'src/'.length)

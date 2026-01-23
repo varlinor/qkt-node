@@ -1,5 +1,19 @@
 # @varlinor/cli
 
+## 2.0.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.2.1
+
+## 2.0.5-snapshot.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.2.1-snapshot.0
+
 ## 2.0.4
 
 ### Patch Changes

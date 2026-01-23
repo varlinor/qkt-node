@@ -59,7 +59,9 @@ export function scanAllComponents(packages: string[]) {
 
         if (Array.isArray(allVues)) {
           allVues.forEach((f) => {
-            const d = normalizePath(f).split('/src/')[1]
+            const nrmPath = normalizePath(f)
+            const lastSrcIndex = nrmPath.lastIndexOf('/src/')
+            const d = lastSrcIndex !== -1 ? nrmPath.substring(lastSrcIndex + 5) : nrmPath
             const key = `/@/${d}`
             comPaths[key] = key
           })

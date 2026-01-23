@@ -1,0 +1,42 @@
+---
+globs: *.ts,*.tsx
+description: TypeScript 与通用代码风格规范（基于本仓库约定）
+---
+# TypeScript 与通用代码风格规范
+
+适用范围：`*.ts, *.tsx`
+
+- 类型与导出
+  - 导出/公共 API 显式标注类型；局部易推断变量可省略
+  - 避免 `any`；优先使用明确类型与类型收窄
+  - 尽量使用具名导出，统一入口 `index.ts`
+
+- 控制流
+  - 使用卫语句（早返回），避免深层嵌套（>2-3 层）
+  - 非必要不使用 `try/catch`；捕获后需有有意义的处理
+
+- 命名
+  - 函数用动词/动词短语；变量用名词/名词短语
+  - 使用完整、可读的名称，避免缩写与 1-2 字母名称
+
+- 注释
+  - 仅保留关键上下文与非显而易见的意图/约束
+  - 避免陈述显然之事；不使用冗余 TODO，尽量直接实现
+
+- 格式化
+  - 遵循现有代码风格；不随意重排无关代码
+  - 长行换行；避免复杂的单行三元表达式
+
+- 代码组织（与本仓库结构相关）
+  - 公共工具/类型放置在对应包的 `src/modules` 或 `src/utils`
+  - 插件统一放在 `packages/node-tools/src/plugins`，保持最小依赖面
+  - 各包 `src/index.ts` 为主要入口与导出聚合点
+
+- 性能与可维护性
+  - 对热路径保持分支清晰与最小分配；必要时微基准
+  - 保持函数单一职责；过长函数应拆分
+
+- 对应文件参考
+  - Vue3 动态导入工具：[packages/builder-vue3/src/utils/dynamic-import.ts](mdc:packages/builder-vue3/src/utils/dynamic-import.ts)
+  - 目录/Glob 解析（Node 插件）：[packages/node-tools/src/plugins/resolve-glob-imports.ts](mdc:packages/node-tools/src/plugins/resolve-glob-imports.ts)
+  - CLI 模块样例：[packages/cli/src/modules/gen-sfc-defs.ts](mdc:packages/cli/src/modules/gen-sfc-defs.ts)
