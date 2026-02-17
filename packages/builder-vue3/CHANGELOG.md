@@ -1,5 +1,122 @@
 # @varlinor/builder-vue3
 
+## 2.2.1
+
+### Patch Changes
+
+- fix: 解决路径中存在多个src导致解析失败的bug
+- Updated dependencies
+  - @varlinor/node-tools@2.2.1
+
+## 2.2.1-snapshot.0
+
+### Patch Changes
+
+- fix: 解决路径中存在多个src导致解析失败的bug
+- Updated dependencies
+  - @varlinor/node-tools@2.2.1-snapshot.0
+
+## 2.2.0
+
+### Minor Changes
+
+- fix: 修改ts代码中的glob处理机制
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @varlinor/node-tools@2.2.0
+
+## 2.2.0-snapshot.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.2.0-snapshot.4
+
+## 2.2.0-snapshot.3
+
+### Minor Changes
+
+- fix: 修改ts代码中的glob处理机制
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.2.0-snapshot.3
+
+## 2.1.6-snapshot.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.1.1-snapshot.2
+
+## 2.1.6-snapshot.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.1.1-snapshot.1
+
+## 2.1.6-snapshot.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.1.1-snapshot.0
+
+## 2.1.5
+
+### Patch Changes
+
+- fix: 修复sfc打包时追加replace插件
+
+## 2.1.4
+
+### Patch Changes
+
+- fix: support replace config in build period for vite
+
+## 2.1.3
+
+### Patch Changes
+
+- fix: 修复拷贝静态资源路径问题
+
+## 2.1.2
+
+### Patch Changes
+
+- fix: 修改包的根路径缺失的bug
+
+## 2.1.1
+
+### Patch Changes
+
+- feat: 追加静态资源拷贝的功能
+
+## 2.1.0
+
+### Minor Changes
+
+- fix: 解决AST错误解析index.vue 报错的问题
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.1.0
+
+## 2.0.3
+
+### Patch Changes
+
+- chore: add hooks to outputs
+
 ## 2.0.2
 
 ### Patch Changes

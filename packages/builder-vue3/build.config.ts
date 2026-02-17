@@ -8,7 +8,8 @@ import { getAllDependencies } from '@varlinor/node-tools'
 console.log('prepare for build lib:')
 const entries = [
   { name: 'index', input: './src/index.ts' },
-  { name: 'utils/dynamic-import', input: './src/utils/dynamic-import.ts' }
+  { name: 'utils/dynamic-import', input: './src/utils/dynamic-import.ts' },
+  { name: 'hooks', input: './src/hooks/index.ts' }
 ]
 
 // 获取externals

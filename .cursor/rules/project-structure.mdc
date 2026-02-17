@@ -1,0 +1,47 @@
+---
+alwaysApply: true
+---
+# 项目结构总览（Monorepo / PNPM 工作区）
+
+本仓库为 PNPM Monorepo，根目录包含工作区配置与共享脚本：
+
+- 根配置与脚本：
+  - `pnpm-workspace.yaml`：定义工作区包路径
+  - `tsconfig.base.json`、`tsconfig.json`：共享 TS 配置
+  - `babel.config.js`：Babel 配置
+  - `postinstall.js`：安装后脚本
+  - `README.md`、`CONTRIBUTING.md`、`LICENSE`
+
+- 工作区包（packages/）：
+  - `packages/builder-vue2/`：Vue2 构建工具与格式化器
+    - 入口与导出：[packages/builder-vue2/src/index.ts](mdc:packages/builder-vue2/src/index.ts)
+    - 格式化工具：[packages/builder-vue2/src/formatter.ts](mdc:packages/builder-vue2/src/formatter.ts)
+    - 构建配置：[packages/builder-vue2/build.config.ts](mdc:packages/builder-vue2/build.config.ts)
+  - `packages/builder-vue3/`：Vue3 构建工具，包含 hooks 与动态导入工具
+    - 入口与导出：[packages/builder-vue3/src/index.ts](mdc:packages/builder-vue3/src/index.ts)
+    - Hooks 汇总：[packages/builder-vue3/src/hooks/index.ts](mdc:packages/builder-vue3/src/hooks/index.ts)
+    - 目录/Glob 解析：[packages/builder-vue3/src/hooks/resolve-dir-import.ts](mdc:packages/builder-vue3/src/hooks/resolve-dir-import.ts)，[packages/builder-vue3/src/hooks/resolve-glob-imports.ts](mdc:packages/builder-vue3/src/hooks/resolve-glob-imports.ts)
+    - 动态导入工具：[packages/builder-vue3/src/utils/dynamic-import.ts](mdc:packages/builder-vue3/src/utils/dynamic-import.ts)
+    - 构建配置：[packages/builder-vue3/build.config.ts](mdc:packages/builder-vue3/build.config.ts)
+  - `packages/cli/`：命令行工具
+    - 入口：[packages/cli/src/index.ts](mdc:packages/cli/src/index.ts)
+    - 常用模块：`modules/clean.ts`、`modules/gen-sfc-defs.ts`、`modules/git.ts`、`modules/version.ts`
+    - 构建配置：[packages/cli/build.config.ts](mdc:packages/cli/build.config.ts)
+  - `packages/node-tools/`：Node 工具与 Vite/构建插件
+    - 入口：[packages/node-tools/src/index.ts](mdc:packages/node-tools/src/index.ts)
+    - 工具模块：`modules/*.ts` 文件（文件/路径/包/选择/TS 辅助）
+    - 插件：`plugins/*.ts`（动态导入、目录/Glob 解析、SVG 转换、Vue3 SFC 适配器）
+    - 构建配置：[packages/node-tools/build.config.ts](mdc:packages/node-tools/build.config.ts)
+
+- 测试工作区（test/）：
+  - 用于端到端/集成验证的独立包，包含：
+    - 入口测试：[test/src/testGenSfcDefs.js](mdc:test/src/testGenSfcDefs.js)，[test/src/testGetJs.js](mdc:test/src/testGetJs.js)
+    - 测试目录结构样例：[test/testDir/](mdc:test/testDir)
+
+核心定位：
+
+- 若定位 CLI 行为，从 `packages/cli/src/index.ts` 入手，按子命令跳转至 `modules/*.ts`
+- 若定位 Vue 构建时的“目录/Glob 解析”或“动态导入”，优先查看 `packages/node-tools/plugins/` 与 `packages/builder-vue3/src/hooks/`
+- 共享工具与路径/包解析逻辑在 `packages/node-tools/src/modules/` 中
+
+构建产物位于各包 `dist/` 目录；如需查看运行时行为，优先阅读对应包的 `src/` 源码。

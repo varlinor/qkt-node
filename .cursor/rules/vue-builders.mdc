@@ -1,0 +1,28 @@
+---
+description: Vue2/Vue3 构建器与动态导入、目录/Glob 解析相关导航
+---
+# Vue 构建相关导航（Vue2 / Vue3 / 动态导入 / 目录与 Glob 解析）
+
+- Vue2 构建器（builder-vue2）
+  - 入口与导出：[packages/builder-vue2/src/index.ts](mdc:packages/builder-vue2/src/index.ts)
+  - 格式化器（SFC/输出格式）：[packages/builder-vue2/src/formatter.ts](mdc:packages/builder-vue2/src/formatter.ts)
+  - 构建配置：[packages/builder-vue2/build.config.ts](mdc:packages/builder-vue2/build.config.ts)
+
+- Vue3 构建器（builder-vue3）
+  - 入口与导出：[packages/builder-vue3/src/index.ts](mdc:packages/builder-vue3/src/index.ts)
+  - Hooks 汇总：[packages/builder-vue3/src/hooks/index.ts](mdc:packages/builder-vue3/src/hooks/index.ts)
+  - 目录解析 Hook：[packages/builder-vue3/src/hooks/resolve-dir-import.ts](mdc:packages/builder-vue3/src/hooks/resolve-dir-import.ts)
+  - Glob 解析 Hook：[packages/builder-vue3/src/hooks/resolve-glob-imports.ts](mdc:packages/builder-vue3/src/hooks/resolve-glob-imports.ts)
+  - 动态导入工具：[packages/builder-vue3/src/utils/dynamic-import.ts](mdc:packages/builder-vue3/src/utils/dynamic-import.ts)
+
+- Node 工具/插件（与构建强相关）
+  - 动态导入器插件：[packages/node-tools/src/plugins/dynamic-importer.ts](mdc:packages/node-tools/src/plugins/dynamic-importer.ts)
+  - 目录导入解析插件：[packages/node-tools/src/plugins/resolve-dir-import.ts](mdc:packages/node-tools/src/plugins/resolve-dir-import.ts)
+  - Glob 导入解析插件：[packages/node-tools/src/plugins/resolve-glob-imports.ts](mdc:packages/node-tools/src/plugins/resolve-glob-imports.ts)
+  - SVG 转换插件：[packages/node-tools/src/plugins/svg-transform.ts](mdc:packages/node-tools/src/plugins/svg-transform.ts)
+  - Vue3 SFC 适配器：[packages/node-tools/src/plugins/vue3-sfc-adapter.ts](mdc:packages/node-tools/src/plugins/vue3-sfc-adapter.ts)
+
+- 排错建议
+  - 确认“解析”阶段发生位置（Hook vs Node 插件）；Vue3 多发生在 `hooks/*` 与 `plugins/*`
+  - 产物不符时对比对应 `dist/*.mjs` 与 `src/*.ts` 差异，检查构建配置
+  - 涉及路径/包解析时，留意 `packages/node-tools/src/modules/path-helper.ts`、`pkg-helper.ts`

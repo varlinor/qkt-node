@@ -59,7 +59,9 @@ export function scanAllComponents(packages: string[]) {
 
         if (Array.isArray(allVues)) {
           allVues.forEach((f) => {
-            const d = normalizePath(f).split('/src/')[1]
+            const nrmPath = normalizePath(f)
+            const lastSrcIndex = nrmPath.lastIndexOf('/src/')
+            const d = lastSrcIndex !== -1 ? nrmPath.substring(lastSrcIndex + 5) : nrmPath
             const key = `/@/${d}`
             comPaths[key] = key
           })
@@ -80,13 +82,13 @@ export function scanAllComponents(packages: string[]) {
               comPath = path.join('./node_modules', pkg, 'src/', dir, importPath)
               impName = path.basename(importPath, '.vue')
             } else if (fs.existsSync(path.join(packagePath, 'dist'))) {
-              if (outputFileName) {
-                comPath = path.join('./node_modules', pkg, 'dist/', dir, outputFileName)
+              // if (outputFileName) {
+              //   comPath = path.join('./node_modules', pkg, 'dist/', dir, outputFileName)
+              //   impName = outputFileName
+              // } else {
+                comPath = path.join('./node_modules', pkg, 'dist/', dir, `${outputFileName}.js`)
                 impName = outputFileName
-              } else {
-                comPath = path.join('./node_modules', pkg, 'dist/', dir, importPath)
-                impName = path.basename(importPath)
-              }
+              // }
             }
             if (comPath && impName) {
               let importer = `${pkg}/${dir}/${impName}`

@@ -1,5 +1,74 @@
 # @varlinor/builder-vue2
 
+## 2.0.5
+
+### Patch Changes
+
+- fix: 解决路径中存在多个src导致解析失败的bug
+- Updated dependencies
+  - @varlinor/node-tools@2.2.1
+
+## 2.0.5-snapshot.0
+
+### Patch Changes
+
+- fix: 解决路径中存在多个src导致解析失败的bug
+- Updated dependencies
+  - @varlinor/node-tools@2.2.1-snapshot.0
+
+## 2.0.4
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @varlinor/node-tools@2.2.0
+
+## 2.0.4-snapshot.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.2.0-snapshot.4
+
+## 2.0.4-snapshot.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.2.0-snapshot.3
+
+## 2.0.4-snapshot.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.1.1-snapshot.2
+
+## 2.0.4-snapshot.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.1.1-snapshot.1
+
+## 2.0.4-snapshot.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.1.1-snapshot.0
+
+## 2.0.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @varlinor/node-tools@2.1.0
+
 ## 2.0.2
 
 ### Patch Changes

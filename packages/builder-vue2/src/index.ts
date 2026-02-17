@@ -90,9 +90,10 @@ export function createPackObj(comDefines, distDir, format = 'es', rollupOpts = {
       const entryFilePath = mergePath(curRootDir, basedir, DEF_SEPARATER)
       const inputFile = `${entryFilePath}/${filename}`
       let outputPrefix = '' //  类似 packages/layout/src
-      if (basedir.indexOf('src/') > -1) {
+      const lastSrcIdx = basedir.lastIndexOf('src/')
+      if (lastSrcIdx > -1) {
         //  类似 packages/layout/src/lock
-        outputPrefix = basedir.substring(basedir.indexOf('src/') + 4)
+        outputPrefix = basedir.substring(lastSrcIdx + 4)
       }
       const outputBase = `${distDir}/${outputPrefix}`
       // 防止filename的后缀干扰

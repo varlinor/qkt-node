@@ -14,7 +14,7 @@ export function createRewriteHook(
   scopes: string[],
   exts?: string[],
   subPackageBase?: string = 'packages/'
-): function {
+): Function {
   return (ctx, opts) => {
     // console.log('current opts:', opts)
     const { plugins } = opts

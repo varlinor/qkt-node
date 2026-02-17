@@ -4,6 +4,21 @@
 
 This package provides a set of command-line tools for managing and building front-end projects. These tools include functionalities for cleaning the node_modules directory, creating and managing project versions, removing Git tags, and generating Vue component definition files and entry files. With these CLI tools, developers can more efficiently maintain project structure, manage version control, automate common development tasks, and simplify the generation and management of components.
 
+## Requirements
+
+- **Node.js**: >= 18.0.0
+- **Git**: >= 2.30.0 (用于版本管理和标签功能)
+
+详细的环境要求和兼容性说明，请查看：
+- [系统要求文档](../../docs/requirements.md)
+- [版本兼容性说明](../../docs/compatibility.md)
+- [常见问题/故障排除](../../docs/troubleshooting.md)
+
+For detailed requirements and compatibility information, please see:
+- [Requirements](../../docs/requirements.md)
+- [Compatibility Guide](../../docs/compatibility.md)
+- [Troubleshooting](../../docs/troubleshooting.md)
+
 ## Installation
 
 ```bash
@@ -13,6 +28,18 @@ npm install -D @varlinor/cli
 
 pnpm add -D @varlinor/cli
 ```
+
+### 全局安装 (可选)
+
+### Global Installation (Optional)
+
+```bash
+npm install -g @varlinor/cli
+```
+
+安装后可以直接使用 `qkt-cli` 命令。
+
+After installation, you can use the `qkt-cli` command directly.
 
 ## Usage
 
