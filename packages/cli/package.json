@@ -48,7 +48,7 @@
     "lodash-es": "^4.17.23",
     "semver": "^7.7.2",
     "shelljs": "^0.10.0",
-    "simple-git": "^3.28.0",
+    "simple-git": "^3.32.3",
     "yaml": "^2.8.1"
   },
   "repository": {
